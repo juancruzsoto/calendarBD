@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import NavBar from "./NavBar";
@@ -24,12 +24,56 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
+import { register } from "../actions/auth";
 import { googleLogin } from "../actions/auth";
 
 const useStyles = makeStyles(registerStyle);
 
 const RegisterUser = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const [infoR, setInfoR] = useState({
+    email: "",
+    user: "",
+    pass: "",
+    passR: "",
+  });
+  const { email, user, pass, passR } = infoR;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+
+    setInfoR({
+      ...infoR,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleRegister = (e) => {
+    console.log(infoR);
+
+    e.preventDefault();
+
+    if (email.trim() === "" || !email.trim().includes("@")) {
+      return;
+    }
+
+    if (user.trim().length < 2) {
+      return;
+    }
+
+    if (pass.trim().length < 6) {
+      return;
+    } else {
+      if (pass.trim() !== passR.trim()) {
+        return;
+      }
+    }
+
+    dispatch(register(email, pass, user));
+  };
 
   return (
     <div>
@@ -58,7 +102,10 @@ const RegisterUser = () => {
                       Correo electrónico
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                      value={email}
+                      id="input-with-icon-adornment1"
+                      name="email"
+                      onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">
                           <AccountCircle />
@@ -76,7 +123,10 @@ const RegisterUser = () => {
                       Usuario
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                       value={user}
+                       id="input-with-icon-adornment2"
+                       name="user"
+                       onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">
                           <AccountCircle />
@@ -94,7 +144,10 @@ const RegisterUser = () => {
                       Contraseña
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                       value={pass}
+                       id="input-with-icon-adornment3"
+                       name="pass"
+                       onChange={handleChange}
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
@@ -113,7 +166,10 @@ const RegisterUser = () => {
                       Repetir Contraseña
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                       value={passR}
+                       id="input-with-icon-adornment4"
+                       name="passR"
+                       onChange={handleChange}
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
@@ -129,6 +185,7 @@ const RegisterUser = () => {
                     size="medium"
                     variant="contained"
                     className={classes.button}
+                    onClick={handleRegister}
                     // disabled={
                     //   (values.email === "" && values.password === "") ||
                     //   Object.keys(formErrors).length > 0

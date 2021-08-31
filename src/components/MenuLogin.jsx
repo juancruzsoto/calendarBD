@@ -24,7 +24,7 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
-import { googleLogin } from "../actions/auth";
+import { emailAndPasswordLogin, googleLogin } from "../actions/auth";
 
 const useStyles = makeStyles(menuStyle);
 
@@ -38,7 +38,38 @@ const MenuLogin = () => {
     setSelectedDate(date);
   };
 
+  const [data, setData] = useState({
+    email: "",
+    pass: "",
+  });
+
+  const { email, pass } = data;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+
+    setData({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+
   const dispatch = useDispatch();
+
+
+  const handleEmailLogin = (e) => {
+    e.preventDefault();
+
+    if (email.trim() === "" || !email.trim().includes("@")) {
+      return;
+    }
+
+    if (pass.trim().length < 6) {
+      return;
+    }
+
+    dispatch(emailAndPasswordLogin(email, pass));
+  };
 
   const handleGoogleLogin = () => {
     dispatch(googleLogin());
@@ -70,7 +101,10 @@ const MenuLogin = () => {
                       Correo Eléctronico
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                    onChange={handleChange}
+                    value={email}
+                    name="email"
+                      id="input-with-icon-adornment1"
                       startAdornment={
                         <InputAdornment position="start">
                           <AccountCircle />
@@ -88,7 +122,10 @@ const MenuLogin = () => {
                       Contraseña
                     </InputLabel>
                     <Input
-                      id="input-with-icon-adornment"
+                      onChange={handleChange}
+                      value={pass}
+                      name="pass"
+                        id="input-with-icon-adornment2"
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
@@ -104,6 +141,7 @@ const MenuLogin = () => {
                     size="medium"
                     variant="contained"
                     className={classes.button}
+                    onClick={handleEmailLogin}
                     // disabled={
                     //   (values.email === "" && values.password === "") ||
                     //   Object.keys(formErrors).length > 0
