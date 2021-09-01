@@ -5,10 +5,9 @@ import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
 import menuStyle from "../assets/jss/menuStyle";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -31,7 +30,7 @@ const useStyles = makeStyles(menuStyle);
 const MenuLogin = () => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(
-    new Date("2014-08-18T21:11:54")
+    new Date("2014-08-18")
   );
 
   const handleDateChange = (date) => {
@@ -39,10 +38,6 @@ const MenuLogin = () => {
   };
 
   const dispatch = useDispatch();
-
-  const handleGoogleLogin = () => {
-    dispatch(googleLogin());
-  };
 
   return (
     <div>
@@ -70,22 +65,11 @@ const MenuLogin = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="Date picker dialog"
-                    format="MM/dd/yyyy"
-                    value={selectedDate}
+                  <DatePicker
+                    selected={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
+                    locale="es"
                   />
-                  </MuiPickersUtilsProvider>
-                </Grid>
-                <Grid item xs={12}>
-                  <Link to="/pwrecovery">¿Has olvidado tu contraseña?</Link>
                 </Grid>
               </Grid>
             </CardContent>
