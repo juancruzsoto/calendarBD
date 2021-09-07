@@ -77,7 +77,6 @@ const RegisterUser = () => {
 
   return (
     <div>
-      <NavBar />
       <Grid container spacing={6} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.root}>
@@ -123,10 +122,10 @@ const RegisterUser = () => {
                       Usuario
                     </InputLabel>
                     <Input
-                       value={user}
-                       id="input-with-icon-adornment2"
-                       name="user"
-                       onChange={handleChange}
+                      value={user}
+                      id="input-with-icon-adornment2"
+                      name="user"
+                      onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">
                           <AccountCircle />
@@ -144,10 +143,10 @@ const RegisterUser = () => {
                       Contraseña
                     </InputLabel>
                     <Input
-                       value={pass}
-                       id="input-with-icon-adornment3"
-                       name="pass"
-                       onChange={handleChange}
+                      value={pass}
+                      id="input-with-icon-adornment3"
+                      name="pass"
+                      onChange={handleChange}
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
@@ -166,10 +165,10 @@ const RegisterUser = () => {
                       Repetir Contraseña
                     </InputLabel>
                     <Input
-                       value={passR}
-                       id="input-with-icon-adornment4"
-                       name="passR"
-                       onChange={handleChange}
+                      value={passR}
+                      id="input-with-icon-adornment4"
+                      name="passR"
+                      onChange={handleChange}
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">

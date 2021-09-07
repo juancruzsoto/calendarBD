@@ -1,25 +1,13 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
 import menuStyle from "../assets/jss/menuStyle";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  MonthlyBody,
-  MonthlyCalendar,
-  MonthlyNav,
-  DefaultMonthlyEventItem,
-} from "@zach.codes/react-calendar";
-import toast from "@mobiscroll/react-lite";
-import Eventcalendar from "@mobiscroll/react-lite";
-import localeEs from "@mobiscroll/react-lite";
-
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import MomentUtils from "@date-io/moment";
+// import { Link } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -87,12 +75,6 @@ const MenuLogin = () => {
     },
   ]);
 
-  const onEventClick = useCallback((event) => {
-    toast({
-      message: event.event.title,
-    });
-  }, []);
-
   const view = useMemo(() => {
     return {
       calendar: { labels: true },
@@ -132,13 +114,13 @@ const MenuLogin = () => {
                   />
                 </Grid> */}
                 <Grid item xs={12}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Grid container justifyContent="space-around">
                       <KeyboardDatePicker
                         margin="normal"
                         id="date-picker-dialog"
                         label="Date picker dialog"
-                        format="dd/MM/yyyy"
+                        format="L"
                         value={selectedDate}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
@@ -148,21 +130,7 @@ const MenuLogin = () => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={12}>
-                  {/* <Eventcalendar
-                    locale={localeEs}
-                    theme="ios"
-                    themeVariant="light"
-                    clickToCreate={false}
-                    dragToCreate={false}
-                    dragToMove={false}
-                    dragToResize={false}
-                    height={697}
-                    data={myEvents}
-                    view={view}
-                    onEventClick={onEventClick}
-                  /> */}
-                </Grid>
+                <Grid item xs={12}></Grid>
               </Grid>
             </CardContent>
           </Card>

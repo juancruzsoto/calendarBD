@@ -19,7 +19,7 @@ export const register = (email, password, username) => {
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await user.updateProfile({ displayName: username });
-        console.log("todo joya")
+        console.log("todo joya");
         dispatch(login(user.uid, user.displayName));
       });
   };
@@ -43,5 +43,15 @@ export const emailAndPasswordLogin = (email, password) => {
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName));
       });
+  };
+};
+
+export const logout = () => {
+  return async (dispatch) => {
+    await firebase.auth().signOut();
+
+    dispatch({
+      type: types.logout,
+    });
   };
 };

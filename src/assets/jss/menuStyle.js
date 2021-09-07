@@ -1,8 +1,16 @@
+import background from "../img/bg-bd.jpg";
+
 const menuStyle = {
   root: {
     flexGrow: 1,
     textAlign: "center",
+    width: "100%",
+    height: "100%",
+    backgroundImage: background,
+  },
+  card: {
     minHeight: 400,
+    textAlign: "center",
     width: "100%",
     marginTop: "60px",
   },

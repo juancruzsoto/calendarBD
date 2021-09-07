@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
-import menuStyle from "../assets/jss/menuStyle";
+import loginStyle from "../assets/jss/loginStyle";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -20,7 +20,9 @@ import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 import { emailAndPasswordLogin, googleLogin } from "../actions/auth";
 
-const useStyles = makeStyles(menuStyle);
+import background from "../assets/img/bg-bd.jpg";
+
+const useStyles = makeStyles(loginStyle);
 
 const MenuLogin = () => {
   const classes = useStyles();
@@ -43,7 +45,6 @@ const MenuLogin = () => {
 
   const dispatch = useDispatch();
 
-
   const handleEmailLogin = (e) => {
     e.preventDefault();
 
@@ -63,11 +64,10 @@ const MenuLogin = () => {
   };
 
   return (
-    <div>
-      <NavBar />
+    <div className={classes.root}>
       <Grid container spacing={6} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
-          <Card className={classes.root}>
+          <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
                 Iniciar Sesión
@@ -88,9 +88,9 @@ const MenuLogin = () => {
                       Correo Eléctronico
                     </InputLabel>
                     <Input
-                    onChange={handleChange}
-                    value={email}
-                    name="email"
+                      onChange={handleChange}
+                      value={email}
+                      name="email"
                       id="input-with-icon-adornment1"
                       startAdornment={
                         <InputAdornment position="start">
@@ -112,7 +112,7 @@ const MenuLogin = () => {
                       onChange={handleChange}
                       value={pass}
                       name="pass"
-                        id="input-with-icon-adornment2"
+                      id="input-with-icon-adornment2"
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
