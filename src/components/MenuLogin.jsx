@@ -69,7 +69,7 @@ const MenuLogin = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.card}>
             <CardContent>
-              <Typography className={classes.title} variant="h4">
+              <Typography className={classes.title} variant="h3">
                 Iniciar Sesión
               </Typography>
               <Grid
@@ -82,6 +82,7 @@ const MenuLogin = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
+                      autofocus={false}
                       htmlFor="input-with-icon-adornment"
                       placeholder="Ingrese correo"
                     >
@@ -138,7 +139,11 @@ const MenuLogin = () => {
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/pwrecovery">¿Has olvidado tu contraseña?</Link>
+                  <Link to="/pwrecovery">
+                    <Typography style={{ color: "#000000" }}>
+                      ¿Has olvidado tu contraseña?{" "}
+                    </Typography>
+                  </Link>
                 </Grid>
                 <Grid item xs={12}>
                   <Divider />
@@ -152,11 +157,19 @@ const MenuLogin = () => {
                 alignItems="flex-start"
               >
                 <Grid item xs={1.5}>
-                  <GoogleButton onClick={handleGoogleLogin} />
+                  <GoogleButton
+                    style={{ backgroundColor: "#78909c" }}
+                    label="Iniciar Sesión con Google"
+                    onClick={handleGoogleLogin}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <form>
-                    <Link to="/register">Registrarse en la plataforma</Link>
+                    <Link to="/register">
+                      <Typography style={{ color: "#000000" }}>
+                        Registrarse en la plataforma
+                      </Typography>
+                    </Link>
                   </form>
                 </Grid>
               </Grid>

@@ -19,6 +19,10 @@ const loginStyle = {
     textAlign: "center",
     width: "100%",
     marginTop: "60px",
+    background: "#fce4ec",  
+    position: "absoute",
+    content: "",
+    opacity: 0.97,
   },
   menucard: {
     backgroundColor: "#333333",
@@ -33,17 +37,19 @@ const loginStyle = {
   },
 
   title: {
-    color: "#f03030",
-    fontWeight: 400,
+    color: "#78909c",
+    fontFamily: "Century Gothic",
+    fontWeight: 550,
   },
   media: {
     height: 250,
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: "#78909c",
     color: "#ffffff",
     "&:hover": {
       backgroundColor: "greenDark",
+      color:"#78909c",
       borderColor: "green",
       boxShadow: "none",
     },

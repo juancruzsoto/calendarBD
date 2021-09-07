@@ -17,6 +17,7 @@ import {
   makeStyles,
   TextField,
 } from "@material-ui/core";
+import Calendar from "react-awesome-calendar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -75,6 +76,58 @@ const MenuLogin = () => {
     },
   ]);
 
+  const events = [
+    {
+      id: 1,
+      color: "#fd3153",
+      from: "2021-05-02T18:00:00+00:00",
+      to: "2021-05-02T18:00:00+00:00",
+      title: "This is an event",
+    },
+    {
+      id: 2,
+      color: "#1ccb9e",
+      from: "2021-05-01T13:00:00+00:00",
+      to: "2021-05-01T13:00:00+00:00",
+      title: "This is another event",
+    },
+    {
+      id: 3,
+      color: "#3694DF",
+      from: "2021-05-05T13:00:00+00:00",
+      to: "2021-05-05T13:00:00+00:00",
+      title: "This is also another event",
+    },
+    {
+      id: 4,
+      color: "#3694DF",
+      from: "2021-05-05T13:00:00+00:00",
+      to: "2021-05-05T13:00:00+00:00",
+      title: "This is also another event",
+    },
+    {
+      id: 5,
+      color: "#3694DF",
+      from: "2021-05-05T13:00:00+00:00",
+      to: "2021-05-05T13:00:00+00:00",
+      title: "This is also another event",
+    },
+    {
+      id: 6,
+      color: "#3694DF",
+      from: "2021-05-05T13:00:00+00:00",
+      to: "2021-05-05T13:00:00+00:00",
+      title: "This is also another event",
+    },
+    {
+      id: 7,
+      color: "#3694DF",
+      from: "2021-05-05T13:00:00+00:00",
+      to: "2021-05-05T13:00:00+00:00",
+      title: "This is also another event",
+    },
+  ];
+
   const view = useMemo(() => {
     return {
       calendar: { labels: true },
@@ -130,7 +183,10 @@ const MenuLogin = () => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={12}></Grid>
+                <Grid item xs={12}>
+                  <Calendar 
+                  events={events} />
+                </Grid>
               </Grid>
             </CardContent>
           </Card>

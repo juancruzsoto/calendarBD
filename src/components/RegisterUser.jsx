@@ -76,10 +76,10 @@ const RegisterUser = () => {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       <Grid container spacing={6} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
-          <Card className={classes.root}>
+          <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
                 Registrarse
@@ -95,7 +95,7 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment"
+                      htmlFor="input-with-icon-adornment1"
                       placeholder="Ingrese correo"
                     >
                       Correo electrónico
@@ -116,7 +116,7 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment"
+                      htmlFor="input-with-icon-adornment2"
                       placeholder="Ingrese correo"
                     >
                       Usuario
@@ -137,7 +137,7 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment"
+                      htmlFor="input-with-icon-adornment3"
                       placeholder="Ingrese correo"
                     >
                       Contraseña
@@ -159,7 +159,7 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment"
+                      htmlFor="input-with-icon-adornment4"
                       placeholder="Ingrese contraseña"
                     >
                       Repetir Contraseña
@@ -205,7 +205,11 @@ const RegisterUser = () => {
                 alignItems="flex-start"
               >
                 <Grid item xs={12}>
-                  <Link to="/login">¿Ya estas registrado? Iniciar Sesión</Link>
+                  <Link to="/login">
+                    <Typography style={{ color: "#000000" }}>
+                      ¿Ya estas registrado? Iniciar Sesión
+                    </Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </CardContent>
