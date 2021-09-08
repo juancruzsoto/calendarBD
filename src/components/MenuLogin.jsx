@@ -13,7 +13,9 @@ import {
   InputAdornment,
   makeStyles,
 } from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import EmailIcon from "@material-ui/icons/Email";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
@@ -72,6 +74,7 @@ const MenuLogin = () => {
               <Typography className={classes.title} variant="h3">
                 Iniciar Sesión
               </Typography>
+              <Divider />
               <Grid
                 container
                 spacing={3}
@@ -95,7 +98,7 @@ const MenuLogin = () => {
                       id="input-with-icon-adornment1"
                       startAdornment={
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <EmailIcon />
                         </InputAdornment>
                       }
                     />
@@ -117,7 +120,7 @@ const MenuLogin = () => {
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <VpnKeyIcon />
                         </InputAdornment>
                       }
                     />

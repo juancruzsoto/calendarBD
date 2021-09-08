@@ -52,7 +52,7 @@ const MenuLogin = () => {
     },
     {
       start: "2021-09-04T12:00:00.000Z",
-      end: "2021-09-05T20:00:00.000Z",
+      end: "2021-09-09T20:00:00.000Z",
       title: "Friends binge marathon",
       color: "#7bde83",
     },
@@ -80,50 +80,29 @@ const MenuLogin = () => {
     {
       id: 1,
       color: "#fd3153",
-      from: "2021-05-02T18:00:00+00:00",
-      to: "2021-05-02T18:00:00+00:00",
+      from: "2021-09-02T18:00:00+00:00",
+      to: "2021-09-02T18:00:00+00:00",
       title: "This is an event",
     },
     {
       id: 2,
       color: "#1ccb9e",
-      from: "2021-05-01T13:00:00+00:00",
-      to: "2021-05-01T13:00:00+00:00",
+      from: "2021-09-01T13:00:00+00:00",
+      to: "2021-09-01T13:00:00+00:00",
       title: "This is another event",
     },
     {
       id: 3,
       color: "#3694DF",
-      from: "2021-05-05T13:00:00+00:00",
-      to: "2021-05-05T13:00:00+00:00",
+      from: "2021-09T13:00:00+00:00",
+      to: "2021-09T13:00:00+00:00",
       title: "This is also another event",
     },
     {
       id: 4,
       color: "#3694DF",
-      from: "2021-05-05T13:00:00+00:00",
-      to: "2021-05-05T13:00:00+00:00",
-      title: "This is also another event",
-    },
-    {
-      id: 5,
-      color: "#3694DF",
-      from: "2021-05-05T13:00:00+00:00",
-      to: "2021-05-05T13:00:00+00:00",
-      title: "This is also another event",
-    },
-    {
-      id: 6,
-      color: "#3694DF",
-      from: "2021-05-05T13:00:00+00:00",
-      to: "2021-05-05T13:00:00+00:00",
-      title: "This is also another event",
-    },
-    {
-      id: 7,
-      color: "#3694DF",
-      from: "2021-05-05T13:00:00+00:00",
-      to: "2021-05-05T13:00:00+00:00",
+      from: "2021-09T13:00:00+00:00",
+      to: "2021-09T13:00:00+00:00",
       title: "This is also another event",
     },
   ];
@@ -135,11 +114,11 @@ const MenuLogin = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.root}>
       <NavBar />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
-          <Card className={classes.root}>
+          <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
                 ¡Agrega cumpleanos a tu Calendario!
@@ -183,13 +162,12 @@ const MenuLogin = () => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={12}>
-                  <Calendar 
-                  events={events} />
-                </Grid>
               </Grid>
             </CardContent>
           </Card>
+        </Grid>
+        <Grid item xs={12} md={11}>
+          <Calendar events={events} />
         </Grid>
       </Grid>
     </div>

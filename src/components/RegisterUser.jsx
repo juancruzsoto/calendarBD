@@ -20,6 +20,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import EmailIcon from "@material-ui/icons/Email";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
@@ -81,7 +83,7 @@ const RegisterUser = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.card}>
             <CardContent>
-              <Typography className={classes.title} variant="h4">
+              <Typography className={classes.title} variant="h3">
                 Registrarse
               </Typography>
               <Divider />
@@ -107,7 +109,7 @@ const RegisterUser = () => {
                       onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <EmailIcon />
                         </InputAdornment>
                       }
                     />
@@ -150,7 +152,7 @@ const RegisterUser = () => {
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <VpnKeyIcon />
                         </InputAdornment>
                       }
                     />
@@ -172,7 +174,7 @@ const RegisterUser = () => {
                       type="password"
                       startAdornment={
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <VpnKeyIcon />
                         </InputAdornment>
                       }
                     />
