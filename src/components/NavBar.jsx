@@ -169,23 +169,28 @@ const NavBar = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="fixed" style={{ backgroundColor: "#546e7a" }}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          </IconButton> */}
+          <Typography
+            className={classes.title}
+            style={{ color: "#ff8f00", textShadow: "1px 1px 2px black" }}
+            variant="h6"
+            noWrap
+          >
             Calendar Birth-Day
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={1} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

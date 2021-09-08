@@ -1,4 +1,4 @@
-import background from "../img/bg-bd.jpg";
+import background from "../img/mainmenu2.jpg";
 
 const menuStyle = {
   root: {
@@ -17,11 +17,22 @@ const menuStyle = {
     minHeight: 400,
     textAlign: "center",
     width: "100%",
-    marginTop: "60px",
-    background: "#fce4ec",
+    marginTop: "30px",
+    background: "#9e9e9e",
     position: "absoute",
     content: "",
-    opacity: 0.97,
+    opacity: 0.9,
+  },
+  card2: {
+    minHeight: 400,
+    color: "#ff8f00",
+    textAlign: "center",
+    width: "100%",
+    marginTop: "30px",
+    background: "#9e9e9e",
+    position: "absoute",
+    content: "",
+    opacity: 0.9,
   },
   menucard: {
     backgroundColor: "#333333",
@@ -34,17 +45,24 @@ const menuStyle = {
     height: 100,
     paddingBottom: "2rem",
   },
-
+  titlemain: {
+    color: "#263238",
+    fontFamily: "Century Gothic",
+    fontWeight: 550,
+    marginTop:"100px"
+  },
   title: {
-    color: "#f03030",
-    fontWeight: 400,
+    color: "#ff8f00",
+    fontFamily: "Century Gothic",
+    textShadow: "1px 1px 2px black",
+    fontWeight: 550,
   },
   media: {
     height: 250,
   },
   button: {
-    backgroundColor: "green",
-    color: "#ffffff",
+    backgroundColor:"#ff8f00",
+    color: "#263238",
     "&:hover": {
       backgroundColor: "greenDark",
       borderColor: "green",

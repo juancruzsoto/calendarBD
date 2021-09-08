@@ -115,8 +115,13 @@ const MenuLogin = () => {
 
   return (
     <div className={classes.root}>
-      <NavBar />
+      <NavBar position="static"/>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid item xs={12} sm={12} md={8}>
+      <Typography className={classes.titlemain} variant="h2">
+                ¡Bienvenid@ Fulanito!
+              </Typography>
+      </Grid>
         <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.card}>
             <CardContent>
@@ -151,23 +156,42 @@ const MenuLogin = () => {
                       <KeyboardDatePicker
                         margin="normal"
                         id="date-picker-dialog"
-                        label="Date picker dialog"
+                        label="Ingrese fecha de nacimiento"
                         format="L"
                         value={selectedDate}
                         onChange={handleDateChange}
-                        KeyboardButtonProps={{
+                        KeyboardButtonProps={{  
                           "aria-label": "change date",
                         }}
                       />
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    size="medium"
+                    variant="contained"
+                    className={classes.button}
+                    // onClick={handleEmailLogin}
+                    // disabled={
+                    //   (values.email === "" && values.password === "") ||
+                    //   Object.keys(formErrors).length > 0
+                    // }
+                  >
+                    Agregar
+                  </Button>
+                </Grid>
               </Grid>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={11}>
-          <Calendar events={events} />
+        <Grid item xs={12} sm={12} md={10}>
+          <Card className={classes.card2}>
+            <CardContent>
+              <Calendar style={{color: "#ff8f00"}} events={events} />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </div>
