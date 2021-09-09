@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import LoadScreen from "../components/LoadScreen";
 import MenuMain from "../components/MenuMain";
 import MenuLogin from "../components/MenuLogin";
 import RegisterUser from "../components/RegisterUser";
@@ -28,17 +29,32 @@ const AppRouter = () => {
     });
   }, [dispatch]);
 
+  useEffect(() => {
+console.log(log)
+  }, [log])
+
   return (
     <Router>
       <Switch>
-        <PublicRouter exact path="/login" component={MenuLogin} log={log} />
+        {console.log(log)}
+        <PublicRouter
+          exact
+          path="/login"
+          component={MenuLogin}
+          log={log}
+        />
         <PublicRouter
           exact
           path="/register"
           component={RegisterUser}
           log={log}
         />
-        <PrivateRouter exact path="/" log={log} component={MenuMain} />
+        <PrivateRouter
+          exact
+          path="/"
+          log={log}
+          component={MenuMain}
+        />
       </Switch>
     </Router>
   );

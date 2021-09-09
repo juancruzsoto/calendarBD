@@ -31,7 +31,8 @@ import {
 
 const useStyles = makeStyles(menuStyle);
 
-const MenuLogin = () => {
+const MenuMain = (props) => {
+  console.log("props main menu")
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(
     new Date("2014-08-18T21:11:54")
@@ -126,7 +127,7 @@ const MenuLogin = () => {
           <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
-                ¡Agrega cumpleanos a tu Calendario!
+                ¡Agrega cumpleaños a tu Calendario!
               </Typography>
               <Grid
                 container
@@ -198,4 +199,4 @@ const MenuLogin = () => {
   );
 };
 
-export default MenuLogin;
+export default MenuMain;

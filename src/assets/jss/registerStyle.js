@@ -1,4 +1,4 @@
-import background from "../img/bg-bd.jpg";
+import background from "../img/bg-bd4.jpg";
 
 const registerStyle = {
   root: {
@@ -19,10 +19,10 @@ const registerStyle = {
     textAlign: "center",
     width: "100%",
     marginTop: "60px",
-    background: "#fce4ec",  
+    background: "#9e9e9e",  
     position: "absoute",
     content: "",
-    opacity: 0.97,
+    opacity: 0.90,
   },
   menucard: {
     backgroundColor: "#333333",
@@ -37,19 +37,20 @@ const registerStyle = {
   },
 
   title: {
-    color: "#78909c",
+    color: "#ff8f00",
     fontFamily: "Century Gothic",
+    textShadow: "1px 1px 2px black",
     fontWeight: 550,
   },
   media: {
     height: 250,
   },
   button: {
-    backgroundColor: "#78909c",
-    color: "#ffffff",
+    backgroundColor: "#ff8f00",
+    color: "#263238",
     "&:hover": {
       backgroundColor: "greenDark",
-      color:"#78909c",
+      color:"#ff8f00",
       borderColor: "green",
       boxShadow: "none",
     },

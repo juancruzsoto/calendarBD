@@ -21,12 +21,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 import { emailAndPasswordLogin, googleLogin } from "../actions/auth";
-
+import LoadScreen from "./LoadScreen";
 import background from "../assets/img/bg-bd.jpg";
 
 const useStyles = makeStyles(loginStyle);
 
-const MenuLogin = () => {
+const MenuLogin = (props) => {
+  console.log(props)
+    const { logg } = props;
+  console.log("PROPS", logg);
   const classes = useStyles();
 
   const [data, setData] = useState({
@@ -66,121 +69,125 @@ const MenuLogin = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={6} justifyContent="center" alignItems="center">
-        <Grid item xs={12} sm={12} md={8}>
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography className={classes.title} variant="h3">
-                Iniciar Sesión
-              </Typography>
-              <Divider />
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                alignItems="center"
-                className={classes.container}
-              >
-                <Grid item xs={12}>
-                  <FormControl className={classes.margin}>
-                    <InputLabel
-                      autofocus={false}
-                      htmlFor="input-with-icon-adornment"
-                      placeholder="Ingrese correo"
+    <>
+    { console.log(logg,"loggg")}
+      {logg && <LoadScreen></LoadScreen>}
+      <div className={classes.root}>
+        <Grid container spacing={6} justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={12} md={8}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography className={classes.title} variant="h3">
+                  Iniciar Sesión
+                </Typography>
+                <Divider />
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  alignItems="center"
+                  className={classes.container}
+                >
+                  <Grid item xs={12}>
+                    <FormControl className={classes.margin}>
+                      <InputLabel
+                        autofocus={false}
+                        htmlFor="input-with-icon-adornment"
+                        placeholder="Ingrese correo"
+                      >
+                        Correo Eléctronico
+                      </InputLabel>
+                      <Input
+                        onChange={handleChange}
+                        value={email}
+                        name="email"
+                        id="input-with-icon-adornment1"
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <EmailIcon />
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl className={classes.margin}>
+                      <InputLabel
+                        htmlFor="input-with-icon-adornment"
+                        placeholder="Ingrese contraseña"
+                      >
+                        Contraseña
+                      </InputLabel>
+                      <Input
+                        onChange={handleChange}
+                        value={pass}
+                        name="pass"
+                        id="input-with-icon-adornment2"
+                        type="password"
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <VpnKeyIcon />
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      size="medium"
+                      variant="contained"
+                      className={classes.button}
+                      onClick={handleEmailLogin}
+                      // disabled={
+                      //   (values.email === "" && values.password === "") ||
+                      //   Object.keys(formErrors).length > 0
+                      // }
                     >
-                      Correo Eléctronico
-                    </InputLabel>
-                    <Input
-                      onChange={handleChange}
-                      value={email}
-                      name="email"
-                      id="input-with-icon-adornment1"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <EmailIcon />
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl className={classes.margin}>
-                    <InputLabel
-                      htmlFor="input-with-icon-adornment"
-                      placeholder="Ingrese contraseña"
-                    >
-                      Contraseña
-                    </InputLabel>
-                    <Input
-                      onChange={handleChange}
-                      value={pass}
-                      name="pass"
-                      id="input-with-icon-adornment2"
-                      type="password"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <VpnKeyIcon />
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    size="medium"
-                    variant="contained"
-                    className={classes.button}
-                    onClick={handleEmailLogin}
-                    // disabled={
-                    //   (values.email === "" && values.password === "") ||
-                    //   Object.keys(formErrors).length > 0
-                    // }
-                  >
-                    Iniciar Sesión
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Link to="/pwrecovery">
-                    <Typography style={{ color: "#000000" }}>
-                      ¿Has olvidado tu contraseña?{" "}
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                </Grid>
-              </Grid>
-              <Grid
-                container
-                spacing={2}
-                direction="columns"
-                justifyContent="center"
-                alignItems="flex-start"
-              >
-                <Grid item xs={1.5}>
-                  <GoogleButton
-                    style={{ backgroundColor: "#78909c" }}
-                    label="Iniciar Sesión con Google"
-                    onClick={handleGoogleLogin}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <form>
-                    <Link to="/register">
+                      Iniciar Sesión
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Link to="/pwrecovery">
                       <Typography style={{ color: "#000000" }}>
-                        Registrarse en la plataforma
+                        ¿Has olvidado tu contraseña?{" "}
                       </Typography>
                     </Link>
-                  </form>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Divider />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+                <Grid
+                  container
+                  spacing={2}
+                  direction="columns"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                >
+                  <Grid item xs={1.5}>
+                    <GoogleButton
+                      style={{ backgroundColor: "#ff8f00", }}
+                      label="Iniciar Sesión con Google"
+                      onClick={handleGoogleLogin}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <form>
+                      <Link to="/register">
+                        <Typography style={{ color: "#000000" }}>
+                          Registrarse en la plataforma
+                        </Typography>
+                      </Link>
+                    </form>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </>
   );
 };
 
