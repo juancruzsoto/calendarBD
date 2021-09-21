@@ -123,7 +123,7 @@ const MenuMain = (props) => {
       <Grid container spacing={3} justifyContent="center" alignItems="center">
       <Grid item xs={12} sm={12} md={8}>
       <Typography className={classes.titlemain} variant="h2">
-                ¡Bienvenid@ {state.auth.displayName}!
+                ¡Perfil!
               </Typography>
       </Grid>
         <Grid item xs={12} sm={12} md={8}>
@@ -187,13 +187,6 @@ const MenuMain = (props) => {
                   </Button>
                 </Grid>
               </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={10}>
-          <Card className={classes.card2}>
-            <CardContent>
-              <Calendar style={{color: "#ff8f00"}} events={events} />
             </CardContent>
           </Card>
         </Grid>

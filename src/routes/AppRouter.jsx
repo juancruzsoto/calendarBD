@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import LoadScreen from "../components/LoadScreen";
 import MenuMain from "../components/MenuMain";
+import Profile from "../components/Profile.jsx";
 import MenuLogin from "../components/MenuLogin";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
@@ -18,29 +19,23 @@ const AppRouter = () => {
 
   const [log, setLog] = useState(false);
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        dispatch(login(user.uid, user.displayName));
-        setLog(true);
-      } else {
-        setLog(false);
-      }
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-console.log(log)
-  }, [log])
+  firebase.auth().onAuthStateChanged(async (user) => {
+    if (user) {
+      dispatch(login(user.uid, user.displayName));
+      setLog(true);
+    } else {
+      setLog(false);
+    }
+  });
 
   return (
     <Router>
       <Switch>
-        {console.log(log)}
+        {console.log(log, "asada")}
         <PublicRouter
           exact
           path="/login"
-          component={MenuLogin}
+          component={log ? LoadScreen : MenuLogin}
           log={log}
         />
         <PublicRouter
@@ -49,12 +44,8 @@ console.log(log)
           component={RegisterUser}
           log={log}
         />
-        <PrivateRouter
-          exact
-          path="/"
-          log={log}
-          component={MenuMain}
-        />
+        <PrivateRouter exact path="/" log={log} component={MenuMain} />
+        <PrivateRouter exact path="/perfil" log={log} component={Profile} />
       </Switch>
     </Router>
   );

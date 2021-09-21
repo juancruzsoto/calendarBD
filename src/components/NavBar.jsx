@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
@@ -120,7 +121,9 @@ const NavBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem to="/perfil" component={RouterLink} onClick={handleMenuClose}>
+        Profile
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
     </Menu>
@@ -184,6 +187,8 @@ const NavBar = () => {
             style={{ color: "#ff8f00", textShadow: "1px 1px 2px black" }}
             variant="h6"
             noWrap
+            to="/"
+            component={RouterLink}
           >
             Calendar Birth-Day
           </Typography>

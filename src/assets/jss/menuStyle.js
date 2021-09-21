@@ -3,6 +3,7 @@ import background from "../img/mainmenu2.jpg";
 const menuStyle = {
   root: {
     flexGrow: 1,
+    display: "flex",
     textAlign: "center",
     width: "100%",
     overflow: "hidden",

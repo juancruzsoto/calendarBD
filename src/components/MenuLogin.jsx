@@ -1,6 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
 import loginStyle from "../assets/jss/loginStyle";
@@ -19,19 +19,17 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { emailAndPasswordLogin, googleLogin } from "../actions/auth";
 import LoadScreen from "./LoadScreen";
 import background from "../assets/img/bg-bd.jpg";
+import { firebase } from "../config-firebase";
 
 const useStyles = makeStyles(loginStyle);
 
-const MenuLogin = (props) => {
-  console.log(props)
-    const { logg } = props;
-  console.log("PROPS", logg);
+const MenuLogin = () => {
   const classes = useStyles();
-
+  const [log, setlog] = useState(false);
   const [data, setData] = useState({
     email: "",
     pass: "",
@@ -39,6 +37,7 @@ const MenuLogin = (props) => {
 
   const { email, pass } = data;
 
+  const state = useSelector((state) => state);
   const handleChange = (e) => {
     const value = e.target.value;
 
@@ -68,10 +67,20 @@ const MenuLogin = (props) => {
     dispatch(googleLogin());
   };
 
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        setlog(true);
+      } else {
+        setlog(false);
+      }
+    });
+  }, [log]);
+
   return (
     <>
-    { console.log(logg,"loggg")}
-      {logg && <LoadScreen></LoadScreen>}
+    {console.log(state)}
+      {state.auth.uid && <LoadScreen />} 
       <div className={classes.root}>
         <Grid container spacing={6} justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={12} md={8}>
@@ -167,7 +176,7 @@ const MenuLogin = (props) => {
                 >
                   <Grid item xs={1.5}>
                     <GoogleButton
-                      style={{ backgroundColor: "#ff8f00", }}
+                      style={{ backgroundColor: "#ff8f00" }}
                       label="Iniciar Sesión con Google"
                       onClick={handleGoogleLogin}
                     />
