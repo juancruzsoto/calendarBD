@@ -1,10 +1,12 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
-import menuStyle from "../assets/jss/menuStyle";
+import Avatar from "@material-ui/core/Avatar";
+import profileStyle from "../assets/jss/profileStyle.js";
 import "date-fns";
+import { auth } from "../config-firebase";
 import DateFnsUtils from "@date-io/date-fns";
 import MomentUtils from "@date-io/moment";
 // import { Link } from "react-router-dom";
@@ -30,162 +32,104 @@ import {
 } from "@material-ui/pickers";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles(menuStyle);
+const useStyles = makeStyles(profileStyle);
 
-const MenuMain = (props) => {
-  
-  const state = useSelector(state => state)
-  console.log(state.auth.displayName)
+const Profile = (props) => {
+  const state = useSelector((state) => state);
+  const [userData, setUserData] = useState({ nombre: "", email: "" });
+  console.log(state.auth, "esaa", auth().currentUser);
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState(
-    new Date("2014-08-18T21:11:54")
-  );
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
   const dispatch = useDispatch();
 
-  const [myEvents, setEvents] = React.useState([
-    {
-      start: "2021-09-06T08:00:00.000Z",
-      end: "2021-09-09T17:00:00.000Z",
-      title: "Business of Software Conference",
-      color: "#ff6d42",
-    },
-    {
-      start: "2021-09-04T12:00:00.000Z",
-      end: "2021-09-09T20:00:00.000Z",
-      title: "Friends binge marathon",
-      color: "#7bde83",
-    },
-    {
-      start: "2021-09-11T12:00:00.000Z",
-      end: "2021-09-12T20:00:00.000Z",
-      title: "Friends binge marathon",
-      color: "#7bde83",
-    },
-    {
-      start: "2021-09-02T06:00:00.000Z",
-      end: "2021-09-02T07:00:00.000Z",
-      title: "Product team mtg.",
-      color: "#913aa7",
-    },
-    {
-      start: "2021-09-02T13:00:00.000Z",
-      end: "2021-09-02T14:00:00.000Z",
-      title: "General orientation",
-      color: "#35bb5a",
-    },
-  ]);
-
-  const events = [
-    {
-      id: 1,
-      color: "#fd3153",
-      from: "2021-09-02T18:00:00+00:00",
-      to: "2021-09-02T18:00:00+00:00",
-      title: "This is an event",
-    },
-    {
-      id: 2,
-      color: "#1ccb9e",
-      from: "2021-09-01T13:00:00+00:00",
-      to: "2021-09-01T13:00:00+00:00",
-      title: "This is another event",
-    },
-    {
-      id: 3,
-      color: "#3694DF",
-      from: "2021-09T13:00:00+00:00",
-      to: "2021-09T13:00:00+00:00",
-      title: "This is also another event",
-    },
-    {
-      id: 4,
-      color: "#3694DF",
-      from: "2021-09T13:00:00+00:00",
-      to: "2021-09T13:00:00+00:00",
-      title: "This is also another event",
-    },
-  ];
-
-  const view = useMemo(() => {
-    return {
-      calendar: { labels: true },
-    };
+  useEffect(() => {
+    auth()
+      .currentUser.getIdTokenResult()
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((e) => console.log("Error en User data: Datos de auth"));
   }, []);
 
   return (
     <div className={classes.root}>
-      <NavBar position="static"/>
+      <NavBar position="static" />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-      <Grid item xs={12} sm={12} md={8}>
-      <Typography className={classes.titlemain} variant="h2">
-                ¡Perfil!
-              </Typography>
-      </Grid>
-        <Grid item xs={12} sm={12} md={8}>
+        <Grid item xs={12} md={11}>
           <Card className={classes.card}>
             <CardContent>
-              <Typography className={classes.title} variant="h4">
-                ¡Agrega cumpleaños a tu Calendario!
+              <Typography
+                style={{ textAlign: "center" }}
+                className={classes.title}
+                variant="h2"
+              >
+                Perfil
               </Typography>
+              <Divider />
               <Grid
                 container
                 spacing={3}
+                direction="row"
                 justifyContent="center"
-                alignItems="center"
+                alignItems="flex-start"
                 className={classes.container}
               >
-                <Grid item xs={12}>
-                  <FormControl className={classes.margin}>
-                    <TextField
-                      id="input-with-icon-grid"
-                      label="Ingrese un Nombre"
+                <Grid item md={4} xs={12}>
+                  <Grid item xs={12}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={auth().currentUser.photoURL}
+                      style={{ width: "300px", height: "300px" }}
                     />
-                  </FormControl>
+                  </Grid>
                 </Grid>
-                {/* <Grid item xs={12}>
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                    locale="es"
-                  />
-                </Grid> */}
-                <Grid item xs={12}>
-                  <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <Grid container justifyContent="space-around">
-                      <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Ingrese fecha de nacimiento"
-                        format="L"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{  
-                          "aria-label": "change date",
-                        }}
-                      />
+                <Grid item md={6} xs={12}>
+                  <Grid item xs={12}>
+                    <Grid container justifyContent="left" alignItems="left">
+                      <Grid item sm={6} xs={12}>
+                        <Typography align="left" variant="h5" style={{textShadow:"1px 1px 2px #ff8f00"}}>
+                          Nombre y Apellido:
+                        </Typography>
+                      </Grid>
+                      <Grid item sm={6} xs={12}>
+                        <Typography align="left" variant="h5" style={{textShadow:"1px 1px 2px #ff8f00"}}>
+                          Email:
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </MuiPickersUtilsProvider>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="left"
+                      alignItems="left"
+                    >
+                      <Grid item sm={6} xs={12}>
+                        <Typography align="left" variant="h6">
+                          {auth().currentUser.displayName}
+                        </Typography>
+                      </Grid>
+                      <Grid item sm={6} xs={12}>
+                        <Typography align="left" variant="h6">
+                          {auth().currentUser.email}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    size="medium"
-                    variant="contained"
-                    className={classes.button}
-                    // onClick={handleEmailLogin}
-                    // disabled={
-                    //   (values.email === "" && values.password === "") ||
-                    //   Object.keys(formErrors).length > 0
-                    // }
-                  >
-                    Agregar
-                  </Button>
-                </Grid>
+              </Grid>
+
+              <Divider />
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  size="medium"
+                  variant="contained"
+                  className={classes.button}
+                >
+                  Editar Perfil
+                </Button>
               </Grid>
             </CardContent>
           </Card>
@@ -195,4 +139,4 @@ const MenuMain = (props) => {
   );
 };
 
-export default MenuMain;
+export default Profile;

@@ -11,7 +11,7 @@ import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 
 import { login } from "../actions/auth";
-import { firebase } from "../config-firebase";
+import { auth } from "../config-firebase";
 import PublicRouter from "./PublicRouter";
 
 const AppRouter = () => {
@@ -19,7 +19,7 @@ const AppRouter = () => {
 
   const [log, setLog] = useState(false);
 
-  firebase.auth().onAuthStateChanged(async (user) => {
+  auth().onAuthStateChanged(async (user) => {
     if (user) {
       dispatch(login(user.uid, user.displayName));
       setLog(true);
