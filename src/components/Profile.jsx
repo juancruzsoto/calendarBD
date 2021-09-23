@@ -37,19 +37,20 @@ const useStyles = makeStyles(profileStyle);
 const Profile = (props) => {
   const state = useSelector((state) => state);
   const [userData, setUserData] = useState({ nombre: "", email: "" });
-  console.log(state.auth, "esaa", auth().currentUser);
+  const {loading} = props
+  console.log(loading, "esaa", auth().currentUser);
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    auth()
-      .currentUser.getIdTokenResult()
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((e) => console.log("Error en User data: Datos de auth"));
-  }, []);
+  // useEffect(() => {
+  //   auth()
+  //     .currentUser.getIdTokenResult()
+  //     .then((user) => {
+  //       console.log(user);
+  //     })
+  //     .catch((e) => console.log("Error en User data: Datos de auth"));
+  // }, []);
 
   return (
     <div className={classes.root}>
@@ -76,6 +77,7 @@ const Profile = (props) => {
               >
                 <Grid item md={4} xs={12}>
                   <Grid item xs={12}>
+                    {console.log(auth().currentUser)}
                     <Avatar
                       alt="Remy Sharp"
                       src={auth().currentUser.photoURL}
@@ -87,7 +89,7 @@ const Profile = (props) => {
                   <Grid item xs={12}>
                     <Grid container justifyContent="left" alignItems="left">
                       <Grid item sm={6} xs={12}>
-                        <Typography align="left" variant="h5" style={{textShadow:"1px 1px 2px #ff8f00"}}>
+                        <Typography align="left" variant="h5" style={{textShadow:"1px 1px 2 px #ff8f00"}}>
                           Nombre y Apellido:
                         </Typography>
                       </Grid>

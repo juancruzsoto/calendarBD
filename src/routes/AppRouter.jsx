@@ -14,19 +14,10 @@ import { login } from "../actions/auth";
 import { auth } from "../config-firebase";
 import PublicRouter from "./PublicRouter";
 
-const AppRouter = () => {
+const AppRouter = (props) => {
   const dispatch = useDispatch();
 
-  const [log, setLog] = useState(false);
-
-  auth().onAuthStateChanged(async (user) => {
-    if (user) {
-      dispatch(login(user.uid, user.displayName));
-      setLog(true);
-    } else {
-      setLog(false);
-    }
-  });
+  const {log,loading} = props;
 
   return (
     <Router>
@@ -35,7 +26,7 @@ const AppRouter = () => {
         <PublicRouter
           exact
           path="/login"
-          component={log ? LoadScreen : MenuLogin}
+          component={MenuLogin}
           log={log}
         />
         <PublicRouter
@@ -44,8 +35,8 @@ const AppRouter = () => {
           component={RegisterUser}
           log={log}
         />
-        <PrivateRouter exact path="/" log={log} component={MenuMain} />
-        <PrivateRouter exact path="/perfil" log={log} component={Profile} />
+        <PrivateRouter exact path="/" log={log} loading={loading} component={MenuMain} />
+        <PrivateRouter exact path="/perfil" log={log} loading={loading} component={Profile} />
       </Switch>
     </Router>
   );

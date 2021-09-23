@@ -29,7 +29,6 @@ const useStyles = makeStyles(loginStyle);
 
 const MenuLogin = () => {
   const classes = useStyles();
-  const [log, setlog] = useState(false);
   const [data, setData] = useState({
     email: "",
     pass: "",
@@ -67,20 +66,8 @@ const MenuLogin = () => {
     dispatch(googleLogin());
   };
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        setlog(true);
-      } else {
-        setlog(false);
-      }
-    });
-  }, [log]);
-
   return (
     <>
-    {console.log(state)}
-      {state.auth.uid && <LoadScreen />} 
       <div className={classes.root}>
         <Grid container spacing={6} justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={12} md={8}>
