@@ -29,23 +29,27 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import { useSelector } from "react-redux";
+import { crearRegistro } from "../actions/actionsBD";
+import { auth } from "../config-firebase";
 
 const useStyles = makeStyles(menuStyle);
 
 const MenuMain = (props) => {
-  
-  const state = useSelector(state => state)
-  console.log(state.auth.displayName)
+  const state = useSelector((state) => state);
+  console.log(state.auth.displayName);
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(
     new Date("2014-08-18T21:11:54")
   );
+  const dispatch = useDispatch();
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  const dispatch = useDispatch();
+  const handleAddBirthDay = () => {
+    dispatch(crearRegistro());
+  };
 
   const [myEvents, setEvents] = React.useState([
     {
@@ -119,13 +123,13 @@ const MenuMain = (props) => {
 
   return (
     <div className={classes.root}>
-      <NavBar position="static"/>
+      <NavBar position="static" style={{ zIndex: "0" }} />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-      <Grid item xs={12} sm={12} md={8}>
-      <Typography className={classes.titlemain} variant="h2">
-                ¡Bienvenid@ {state.auth.displayName}!
-              </Typography>
-      </Grid>
+        <Grid item xs={12} sm={12} md={8}>
+          <Typography className={classes.titlemain} variant="h2">
+            ¡Bienvenid@ {auth().currentUser.displayName}!
+          </Typography>
+        </Grid>
         <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.card}>
             <CardContent>
@@ -164,7 +168,7 @@ const MenuMain = (props) => {
                         format="L"
                         value={selectedDate}
                         onChange={handleDateChange}
-                        KeyboardButtonProps={{  
+                        KeyboardButtonProps={{
                           "aria-label": "change date",
                         }}
                       />
@@ -176,6 +180,7 @@ const MenuMain = (props) => {
                     type="submit"
                     size="medium"
                     variant="contained"
+                    onClick={handleAddBirthDay}
                     className={classes.button}
                     // onClick={handleEmailLogin}
                     // disabled={
@@ -193,7 +198,7 @@ const MenuMain = (props) => {
         <Grid item xs={12} sm={12} md={10}>
           <Card className={classes.card2}>
             <CardContent>
-              <Calendar style={{color: "#ff8f00"}} events={events} />
+              <Calendar style={{ color: "#ff8f00" }} events={events} />
             </CardContent>
           </Card>
         </Grid>

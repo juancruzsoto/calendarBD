@@ -28,12 +28,14 @@ const AppRouter = (props) => {
           path="/login"
           component={MenuLogin}
           log={log}
+          loading={loading}
         />
         <PublicRouter
           exact
           path="/register"
           component={RegisterUser}
           log={log}
+          loading={loading}
         />
         <PrivateRouter exact path="/" log={log} loading={loading} component={MenuMain} />
         <PrivateRouter exact path="/perfil" log={log} loading={loading} component={Profile} />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const actionsBDReducer = (state,action) => {
+export const storeBDReducer = (state,action) => {
     switch(action.type){
         
     }
