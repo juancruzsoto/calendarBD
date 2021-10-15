@@ -35,20 +35,25 @@ import { auth } from "../config-firebase";
 const useStyles = makeStyles(menuStyle);
 
 const MenuMain = (props) => {
-  const state = useSelector((state) => state);
-  console.log(state.auth.displayName);
   const classes = useStyles();
+  const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(
-    new Date("2014-08-18T21:11:54")
   );
   const dispatch = useDispatch();
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    console.log(date.toDate());
+    setSelectedDate(date.toDate());
   };
 
-  const handleAddBirthDay = () => {
-    dispatch(crearRegistro());
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleAddBirthDay = (event) => {
+    console.log(name);
+    console.log(selectedDate);
+    dispatch(crearRegistro(name, selectedDate));
   };
 
   const [myEvents, setEvents] = React.useState([
@@ -145,10 +150,8 @@ const MenuMain = (props) => {
               >
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
-                    <TextField
-                      id="input-with-icon-grid"
-                      label="Ingrese un Nombre"
-                    />
+                    <InputLabel>Nombre</InputLabel>
+                    <Input id="nombre" onChange={handleNameChange} />
                   </FormControl>
                 </Grid>
                 {/* <Grid item xs={12}>
