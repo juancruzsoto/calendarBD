@@ -128,7 +128,7 @@ const MenuMain = (props) => {
 
   return (
     <div className={classes.root}>
-      <NavBar position="static" style={{ zIndex: "0" }} />
+      
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
           <Typography className={classes.titlemain} variant="h2">

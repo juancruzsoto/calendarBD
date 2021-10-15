@@ -3,10 +3,10 @@ import background from "../img/mainmenu2.jpg";
 const menuStyle = {
   root: {
     flexGrow: 1,
+		minHeight: 400,
+    width: '100%',
     display: "flex",
     textAlign: "center",
-    width: "100%",
-    overflow: "hidden",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom",
@@ -50,7 +50,7 @@ const menuStyle = {
     color: "#263238",
     fontFamily: "Century Gothic",
     fontWeight: 550,
-    marginTop:"100px"
+    marginTop: "30px",
   },
   title: {
     color: "#ff8f00",
@@ -62,7 +62,7 @@ const menuStyle = {
     height: 250,
   },
   button: {
-    backgroundColor:"#ff8f00",
+    backgroundColor: "#ff8f00",
     color: "#263238",
     "&:hover": {
       backgroundColor: "greenDark",

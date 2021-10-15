@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import LoadScreen from "../components/LoadScreen";
-import MenuMain from "../components/MenuMain";
+import MenuView from "../views/MenuView";
 import Profile from "../components/Profile.jsx";
-import MenuLogin from "../components/MenuLogin";
+import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 
@@ -26,7 +26,7 @@ const AppRouter = (props) => {
         <PublicRouter
           exact
           path="/login"
-          component={MenuLogin}
+          component={LoginView}
           log={log}
           loading={loading}
         />
@@ -37,7 +37,7 @@ const AppRouter = (props) => {
           log={log}
           loading={loading}
         />
-        <PrivateRouter exact path="/" log={log} loading={loading} component={MenuMain} />
+        <PrivateRouter exact path="/" log={log} loading={loading} component={MenuView} />
         <PrivateRouter exact path="/perfil" log={log} loading={loading} component={Profile} />
       </Switch>
     </Router>
