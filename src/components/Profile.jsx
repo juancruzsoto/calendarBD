@@ -54,7 +54,7 @@ const Profile = (props) => {
 
   return (
     <div className={classes.root}>
-      <NavBar position="static" />
+      <NavBar position="sticky" />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} md={11}>
           <Card className={classes.card}>

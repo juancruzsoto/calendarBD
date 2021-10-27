@@ -50,7 +50,7 @@ const menuStyle = {
     color: "#263238",
     fontFamily: "Century Gothic",
     fontWeight: 550,
-    marginTop: "30px",
+    marginTop: "80px",
   },
   title: {
     color: "#ff8f00",

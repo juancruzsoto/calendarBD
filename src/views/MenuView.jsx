@@ -5,9 +5,9 @@ import "../assets/css/navbar.css";
 
 function MenuView() {
   return (
-    <div class="container" className={{ flexGrow: 1 }}>
+    <div class="container">
       <div class="header">
-        <NavBar position="fixed" />
+        <NavBar/>
       </div>
       <div class="content">
         <MenuMain />

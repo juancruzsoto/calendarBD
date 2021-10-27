@@ -22,7 +22,6 @@ const AppRouter = (props) => {
   return (
     <Router>
       <Switch>
-        {console.log(log, "asada")}
         <PublicRouter
           exact
           path="/login"

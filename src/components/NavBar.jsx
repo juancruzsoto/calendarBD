@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,8 +13,20 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import FaceIcon from '@material-ui/icons/Face';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/auth";
+import "../assets/css/navbar.css";
+import {
+  ClickAwayListener,
+  Fade,
+  ListItemIcon,
+  MenuList,
+  Paper,
+  Popper,
+} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -59,11 +71,23 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event) => {
+    /*if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      //console.log(event.target);
+      return;
+    }
+    console.log(anchorRef.current.contains(event.target));
+    console.log(event.target);*/
+    setOpen(false);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,66 +106,89 @@ const NavBar = () => {
     dispatch(logout());
   };
 
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  const handleToggle = (event) => {
+    setOpen((prevOpen) => !prevOpen);
+    setAnchorEl(event.currentTarget);
+  };
+
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem to="/perfil" component={RouterLink} onClick={handleMenuClose}>
-        Profile
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
-    </Menu>
-  );
+  // const menuId = "primary-search-account-menu";
+  // const renderMenu = (
+  //   <Menu
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+  //     id={menuId}
+  //     keepMounted
+  //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
+  //     <MenuItem to="/perfil" component={RouterLink} onClick={handleMenuClose}>
+  //       Profile
+  //     </MenuItem>
+  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+  //     <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
+  //   </Menu>
+  // );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  // const mobileMenuId = "primary-search-account-menu-mobile";
+  // const renderMobileMenu = (
+  //   <Menu
+  //     anchorEl={mobileMoreAnchorEl}
+  //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+  //     id={mobileMenuId}
+  //     keepMounted
+  //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+  //     open={isMobileMenuOpen}
+  //     onClose={handleMobileMenuClose}
+  //   >
+  //     <MenuItem>
+  //       <IconButton aria-label="show 11 new notifications" color="inherit">
+  //         <Badge badgeContent={11} color="secondary">
+  //           <NotificationsIcon />
+  //         </Badge>
+  //       </IconButton>
+  //       <p>Notifications</p>
+  //     </MenuItem>
+  //     <MenuItem onClick={handleProfileMenuOpen}>
+  //       <IconButton
+  //         aria-label="account of current user"
+  //         aria-controls="primary-search-account-menu"
+  //         aria-haspopup="true"
+  //         color="inherit"
+  //       >
+  //         <AccountCircle />
+  //       </IconButton>
+  //       <p>Profile</p>
+  //     </MenuItem>
+  //   </Menu>
+  // );
 
   return (
-    <div>
-      <AppBar position="static" style={{ flexGrow: 1,backgroundColor: "#546e7a"}}>
-        <Toolbar>
+    <>
+      <AppBar
+        position="fixed"
+        className={{ top: 0, left: 0, right: 0, zIndex: 999 }}
+        style={{ flexGrow: 1, backgroundColor: "#546e7a" }}
+      >
+        <Toolbar
+          className={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        >
           {/* <IconButton
             edge="start"
             className={classes.menuButton}
@@ -170,9 +217,9 @@ const NavBar = () => {
             <IconButton
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
+              // aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={handleToggle}
               color="inherit"
             >
               <AccountCircle />
@@ -181,19 +228,60 @@ const NavBar = () => {
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
-              aria-controls={mobileMenuId}
+              // aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={handleToggle}
               color="inherit"
             >
               <MoreIcon />
             </IconButton>
           </div>
+          <Popper
+            open={open}
+            anchorEl={anchorEl}
+            placement="bottom-end"
+            style={{ zIndex: "1" }}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps }) => (
+              <Fade {...TransitionProps} timeout={350}>
+                <Paper className={classes.paper}>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="menu-list-grow"
+                      onKeyDown={handleListKeyDown}
+                    >
+                      <MenuItem
+                        className={classes.menu}
+                        to="/perfil"
+                        component={RouterLink}
+                        onClick={handleClose}
+                      >
+                        <ListItemIcon>
+                          <FaceIcon />
+                        </ListItemIcon>
+                        Perfil
+                      </MenuItem>
+                      <MenuItem className={classes.menu} onClick={handleLogOut}>
+                        <ListItemIcon>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        Cerrar Sesión
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </div>
+      {/* {renderMobileMenu}
+      {renderMenu} */}
+    </>
   );
 };
 
