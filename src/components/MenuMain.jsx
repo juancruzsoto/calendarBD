@@ -31,18 +31,17 @@ import {
 import { useSelector } from "react-redux";
 import { crearRegistro } from "../actions/actionsBD";
 import { auth } from "../config-firebase";
+import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(menuStyle);
 
 const MenuMain = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
-  const [selectedDate, setSelectedDate] = useState(
-  );
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch();
 
   const handleDateChange = (date) => {
-    console.log(date.toDate());
     setSelectedDate(date.toDate());
   };
 
@@ -128,7 +127,6 @@ const MenuMain = (props) => {
 
   return (
     <div className={classes.root}>
-      
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={12} md={8}>
           <Typography className={classes.titlemain} variant="h2">
@@ -179,6 +177,8 @@ const MenuMain = (props) => {
                   </MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item xs={12}>
+                  <div
+                    class="buttonCard">
                   <Button
                     type="submit"
                     size="medium"
@@ -193,6 +193,7 @@ const MenuMain = (props) => {
                   >
                     Agregar
                   </Button>
+                  </div>
                 </Grid>
               </Grid>
             </CardContent>

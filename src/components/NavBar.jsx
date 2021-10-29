@@ -14,13 +14,16 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import FaceIcon from '@material-ui/icons/Face';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/auth";
 import "../assets/css/navbar.css";
 import {
+  Button,
   ClickAwayListener,
   Fade,
+  Icon,
   ListItemIcon,
   MenuList,
   Paper,
@@ -214,6 +217,17 @@ const NavBar = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <Button
+                to="/perfil"
+                component={RouterLink}
+                classes={{ label: classes.itemButton }}
+                color="inherit"
+              >
+                <Icon component={CalendarTodayIcon} />
+                <Typography variant="caption" align="center">
+                        Calendario
+                </Typography>
+              </Button>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -223,6 +237,9 @@ const NavBar = () => {
               color="inherit"
             >
               <AccountCircle />
+              <Typography variant="caption" align="center">
+                  Cuenta
+                </Typography>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
