@@ -238,7 +238,7 @@ const NavBar = () => {
             >
               <AccountCircle />
               <Typography variant="caption" align="center">
-                  Cuenta
+                  CUENTA
                 </Typography>
             </IconButton>
           </div>

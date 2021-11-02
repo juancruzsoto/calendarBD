@@ -39,8 +39,7 @@ const menuStyle = {
     backgroundColor: "#333333",
   },
   container: {
-    padding: "20px",
-    marginTop: "20px",
+    padding: "15px",
   },
   content: {
     height: 100,
@@ -65,17 +64,17 @@ const menuStyle = {
     backgroundColor: "#ff8f00",
     color: "#263238",
     "&:hover": {
-      backgroundColor: "greenDark",
-      borderColor: "green",
+      // backgroundColor: "greenDark",
+      // borderColor: "green",
       boxShadow: "none",
     },
     "&:active": {
       boxShadow: "none",
-      backgroundColor: "green",
-      borderColor: "greenLight",
+      // backgroundColor: "green",
+      // borderColor: "greenLight",
     },
     "&:focus": {
-      boxShadow: "greenLight",
+      // boxShadow: "greenLight",
     },
     margin: {
       margin: "20px",

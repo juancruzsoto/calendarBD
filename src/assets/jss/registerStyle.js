@@ -49,18 +49,18 @@ const registerStyle = {
     backgroundColor: "#ff8f00",
     color: "#263238",
     "&:hover": {
-      backgroundColor: "greenDark",
+      // backgroundColor: "greenDark",
       color:"#ff8f00",
-      borderColor: "green",
+      // borderColor: "green",
       boxShadow: "none",
     },
     "&:active": {
       boxShadow: "none",
-      backgroundColor: "green",
-      borderColor: "greenLight",
+      // backgroundColor: "green",
+      // borderColor: "greenLight",
     },
     "&:focus": {
-      boxShadow: "greenLight",
+      // boxShadow: "greenLight",
     },
     margin: {
       margin: "20px",

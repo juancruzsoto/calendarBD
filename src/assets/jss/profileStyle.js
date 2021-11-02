@@ -64,17 +64,17 @@ const menuStyle = {
     color: "#263238",
     marginTop: "10px",
     "&:hover": {
-      backgroundColor: "greenDark",
-      borderColor: "green",
+      // backgroundColor: "greenDark",
+      // borderColor: "green",
       boxShadow: "none",
     },
     "&:active": {
       boxShadow: "none",
-      backgroundColor: "green",
-      borderColor: "greenLight",
+      // backgroundColor: "green",
+      // borderColor: "greenLight",
     },
     "&:focus": {
-      boxShadow: "greenLight",
+      // boxShadow: "greenLight",
     },
     margin: {
       margin: "20px",

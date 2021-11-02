@@ -128,12 +128,12 @@ const MenuMain = (props) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12} sm={12} md={8}>
+        <Grid item xs={12} sm={12} md={9}>
           <Typography className={classes.titlemain} variant="h2">
             ¡Bienvenid@ {auth().currentUser.displayName}!
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={12} md={8}>
+        <Grid item xs={12} sm={12} md={9}>
           <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
@@ -146,10 +146,14 @@ const MenuMain = (props) => {
                 alignItems="center"
                 className={classes.container}
               >
-                <Grid item xs={12}>
+                <Grid item xs={4}>
                   <FormControl className={classes.margin}>
                     <InputLabel>Nombre</InputLabel>
-                    <Input id="nombre" onChange={handleNameChange} />
+                    <Input
+                      id="nombre"
+                      onChange={handleNameChange}
+                      autoComplete="off"
+                    />
                   </FormControl>
                 </Grid>
                 {/* <Grid item xs={12}>
@@ -159,7 +163,7 @@ const MenuMain = (props) => {
                     locale="es"
                   />
                 </Grid> */}
-                <Grid item xs={12}>
+                <Grid item xs={4}>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Grid container justifyContent="space-around">
                       <KeyboardDatePicker
@@ -176,26 +180,38 @@ const MenuMain = (props) => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={12}>
-                  <div
-                    class="buttonCard">
-                  <Button
-                    type="submit"
-                    size="medium"
-                    variant="contained"
-                    onClick={handleAddBirthDay}
-                    className={classes.button}
-                    // onClick={handleEmailLogin}
-                    // disabled={
-                    //   (values.email === "" && values.password === "") ||
-                    //   Object.keys(formErrors).length > 0
-                    // }
-                  >
-                    Agregar
-                  </Button>
+                <Grid item xs={4}>
+                  <div class="buttonCard">
+                    <Button
+                      type="submit"
+                      size="medium"
+                      variant="contained"
+                      onClick={handleAddBirthDay}
+                      className={classes.button}
+                      // onClick={handleEmailLogin}
+                      // disabled={
+                      //   (values.email === "" && values.password === "") ||
+                      //   Object.keys(formErrors).length > 0
+                      // }
+                    >
+                      Agregar
+                    </Button>
                   </div>
                 </Grid>
               </Grid>
+              <Card className={classes.card}>
+                <CardContent>
+                  <Divider />
+                  <Grid
+                    container
+                    spacing={3}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    className={classes.item}
+                  ></Grid>
+                </CardContent>
+              </Card>
             </CardContent>
           </Card>
         </Grid>
