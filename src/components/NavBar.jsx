@@ -182,7 +182,7 @@ const NavBar = () => {
     <>
       <AppBar
         position="fixed"
-        className={{ top: 0, left: 0, right: 0, zIndex: 999 }}
+        className={{ top: 0, left: 0, right: 0, zIndex: 0 }}
         style={{ flexGrow: 1, backgroundColor: "#546e7a" }}
       >
         <Toolbar
@@ -218,7 +218,7 @@ const NavBar = () => {
               </Badge>
             </IconButton>
             <Button
-                to="/perfil"
+                to="/calendario"
                 component={RouterLink}
                 classes={{ label: classes.itemButton }}
                 color="inherit"

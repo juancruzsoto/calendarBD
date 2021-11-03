@@ -13,7 +13,13 @@ import {
   Divider,
   FormControl,
   Grid,
+  IconButton,
   InputAdornment,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
   makeStyles,
   TextField,
 } from "@material-ui/core";
@@ -24,6 +30,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 import { googleLogin } from "../actions/auth";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -31,7 +39,7 @@ import {
 import { useSelector } from "react-redux";
 import { crearRegistro } from "../actions/actionsBD";
 import { auth } from "../config-firebase";
-import "../assets/css/calendar.css";
+// import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(menuStyle);
 
@@ -128,12 +136,12 @@ const MenuMain = (props) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12} sm={12} md={9}>
+        <Grid item xs={12} sm={12} md={8}>
           <Typography className={classes.titlemain} variant="h2">
             ¡Bienvenid@ {auth().currentUser.displayName}!
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={12} md={9}>
+        <Grid item xs={12} sm={12} md={8}>
           <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
@@ -181,13 +189,13 @@ const MenuMain = (props) => {
                   </MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item xs={4}>
-                  <div class="buttonCard">
                     <Button
                       type="submit"
                       size="medium"
                       variant="contained"
                       onClick={handleAddBirthDay}
                       className={classes.button}
+                      style={{textShadow: "0px 0px 0px black"}}
                       // onClick={handleEmailLogin}
                       // disabled={
                       //   (values.email === "" && values.password === "") ||
@@ -196,29 +204,51 @@ const MenuMain = (props) => {
                     >
                       Agregar
                     </Button>
-                  </div>
                 </Grid>
               </Grid>
-              <Card className={classes.card}>
+              <Card className={classes.card2} style={{ marginTop: "0px" }}>
                 <CardContent>
                   <Divider />
                   <Grid
                     container
                     spacing={3}
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    className={classes.item}
-                  ></Grid>
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="flex-start"
+                  >
+                    <Grid item xs={12}>
+                      <List>
+                        <ListItem>
+                          <Grid item xs={4}>
+                            <ListItemText
+                              primary="Nombre:"
+                              secondary="Ruperta"
+                            />
+                          </Grid>
+                          <Grid item xs={4}>
+                            <ListItemText
+                              variant="h6"
+                              primary="Cumpleaños"
+                              secondary="20-12-1999"
+                            />
+                          </Grid>
+                          <Grid item xs={4}>
+                            <ListItemSecondaryAction>
+                              <IconButton edge="end" aria-label="edit ">
+                                <EditIcon />
+                              </IconButton>
+                              <IconButton edge="end" aria-label="delete">
+                                <DeleteIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          </Grid>
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  </Grid>
+                  <Divider />
                 </CardContent>
               </Card>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={10}>
-          <Card className={classes.card2}>
-            <CardContent>
-              <Calendar style={{ color: "#ff8f00" }} events={events} />
             </CardContent>
           </Card>
         </Grid>

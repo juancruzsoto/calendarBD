@@ -135,6 +135,7 @@ const MenuLogin = () => {
                       variant="contained"
                       className={classes.button}
                       onClick={handleEmailLogin}
+                      style={{textShadow: "0px 0px 0px black"}}
                       // disabled={
                       //   (values.email === "" && values.password === "") ||
                       //   Object.keys(formErrors).length > 0

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import LoadScreen from "../components/LoadScreen";
 import MenuView from "../views/MenuView";
+import CalendarView from "../views/CalendarView";
 import Profile from "../components/Profile.jsx";
 import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
@@ -38,6 +39,7 @@ const AppRouter = (props) => {
         />
         <PrivateRouter exact path="/" log={log} loading={loading} component={MenuView} />
         <PrivateRouter exact path="/perfil" log={log} loading={loading} component={Profile} />
+        <PrivateRouter exact path="/calendario" log={log} loading={loading} component={CalendarView} />
       </Switch>
     </Router>
   );
