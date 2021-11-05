@@ -156,7 +156,7 @@ const MenuMain = (props) => {
               >
                 <Grid item xs={4}>
                   <FormControl className={classes.margin}>
-                    <InputLabel>Nombre</InputLabel>
+                    <InputLabel >Nombre</InputLabel>
                     <Input
                       id="nombre"
                       onChange={handleNameChange}
@@ -195,7 +195,7 @@ const MenuMain = (props) => {
                       variant="contained"
                       onClick={handleAddBirthDay}
                       className={classes.button}
-                      style={{textShadow: "0px 0px 0px black"}}
+                      
                       // onClick={handleEmailLogin}
                       // disabled={
                       //   (values.email === "" && values.password === "") ||
@@ -221,6 +221,7 @@ const MenuMain = (props) => {
                         <ListItem>
                           <Grid item xs={4}>
                             <ListItemText
+                            className={classes.title}
                               primary="Nombre:"
                               secondary="Ruperta"
                             />

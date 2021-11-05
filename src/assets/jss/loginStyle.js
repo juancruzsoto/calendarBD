@@ -48,6 +48,7 @@ const loginStyle = {
   button: {
     backgroundColor: "#ff8f00",
     color: "#263238",
+    textShadow: "0px 0px 0px black",
     "&:hover": {
       // backgroundColor: "greenDark",
       color:"#ff8f00",

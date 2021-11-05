@@ -3,8 +3,8 @@ import background from "../img/mainmenu2.jpg";
 const menuStyle = {
   root: {
     flexGrow: 1,
-		minHeight: 400,
-    width: '100%',
+    minHeight: 400,
+    width: "100%",
     display: "flex",
     textAlign: "center",
     backgroundSize: "cover",
@@ -62,6 +62,7 @@ const menuStyle = {
   },
   button: {
     backgroundColor: "#ff8f00",
+    textShadow: "0px 0px 0px black",
     color: "#263238",
     "&:hover": {
       // backgroundColor: "greenDark",
