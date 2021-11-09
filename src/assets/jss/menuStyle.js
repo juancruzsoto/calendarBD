@@ -26,7 +26,6 @@ const menuStyle = {
   },
   card2: {
     minHeight: 400,
-    color: "#ff8f00",
     textAlign: "center",
     width: "100%",
     marginTop: "30px",

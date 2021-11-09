@@ -221,7 +221,6 @@ const MenuMain = (props) => {
                         <ListItem>
                           <Grid item xs={4}>
                             <ListItemText
-                            className={classes.title}
                               primary="Nombre:"
                               secondary="Ruperta"
                             />
