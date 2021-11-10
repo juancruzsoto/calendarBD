@@ -1,14 +1,13 @@
-
 import background from "../img/mainmenu2.jpg";
 
 const menuStyle = {
   root: {
     flexGrow: 1,
-    textAlign: "center",
+    minHeight: 400,
     width: "100%",
-    height: "100vh",
-    overflow: "hidden",
-    backgroundSize: "100vw 100vh",
+    display: "flex",
+    textAlign: "center",
+    backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom",
     backgroundAttachment: "fixed",
@@ -19,7 +18,7 @@ const menuStyle = {
     minHeight: 400,
     textAlign: "center",
     width: "100%",
-    marginTop: "30px",
+    marginTop: "90px",
     background: "#9e9e9e",
     position: "absoute",
     content: "",

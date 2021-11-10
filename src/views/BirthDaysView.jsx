@@ -1,19 +1,19 @@
 import React from "react";
-import CalendarBD from "../components/CalendarBD";
+import BirthDayManagement from "../components/BirthDayManagement.jsx";
 import NavBar from "../components/NavBar";
 import "../assets/css/navbar.css";
 
-function CalendarView() {
+function BirthDaysView() {
   return (
     <div class="container">
       <div class="header">
         <NavBar/>
       </div>
       <div class="content">
-        <CalendarBD />
+        <BirthDayManagement />
       </div>
     </div>
   );
 }
 
-export default CalendarView;
+export default BirthDaysView;

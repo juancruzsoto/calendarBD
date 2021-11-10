@@ -39,6 +39,7 @@ import {
 import { useSelector } from "react-redux";
 import { crearRegistro } from "../actions/actionsBD";
 import { auth } from "../config-firebase";
+import Carousel from "./Carousel";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(menuStyle);
@@ -140,117 +141,6 @@ const MenuMain = (props) => {
           <Typography className={classes.titlemain} variant="h2">
             ¡Bienvenid@ {auth().currentUser.displayName}!
           </Typography>
-        </Grid>
-        <Grid item xs={12} sm={12} md={8}>
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography className={classes.title} variant="h4">
-                ¡Agrega cumpleaños a tu Calendario!
-              </Typography>
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                alignItems="center"
-                className={classes.container}
-              >
-                <Grid item xs={4}>
-                  <FormControl className={classes.margin}>
-                    <InputLabel >Nombre</InputLabel>
-                    <Input
-                      id="nombre"
-                      onChange={handleNameChange}
-                      autoComplete="off"
-                    />
-                  </FormControl>
-                </Grid>
-                {/* <Grid item xs={12}>
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                    locale="es"
-                  />
-                </Grid> */}
-                <Grid item xs={4}>
-                  <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <Grid container justifyContent="space-around">
-                      <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Ingrese fecha de nacimiento"
-                        format="L"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                          "aria-label": "change date",
-                        }}
-                      />
-                    </Grid>
-                  </MuiPickersUtilsProvider>
-                </Grid>
-                <Grid item xs={4}>
-                    <Button
-                      type="submit"
-                      size="medium"
-                      variant="contained"
-                      onClick={handleAddBirthDay}
-                      className={classes.button}
-                      
-                      // onClick={handleEmailLogin}
-                      // disabled={
-                      //   (values.email === "" && values.password === "") ||
-                      //   Object.keys(formErrors).length > 0
-                      // }
-                    >
-                      Agregar
-                    </Button>
-                </Grid>
-              </Grid>
-              <Card className={classes.card2} style={{ marginTop: "0px" }}>
-                <CardContent>
-                  <Divider />
-                  <Grid
-                    container
-                    spacing={3}
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="flex-start"
-                  >
-                    <Grid item xs={12}>
-                      <List>
-                        <ListItem>
-                          <Grid item xs={4}>
-                            <ListItemText
-                              primary="Nombre:"
-                              secondary="Ruperta"
-                            />
-                          </Grid>
-                          <Grid item xs={4}>
-                            <ListItemText
-                              variant="h6"
-                              primary="Cumpleaños"
-                              secondary="20-12-1999"
-                            />
-                          </Grid>
-                          <Grid item xs={4}>
-                            <ListItemSecondaryAction>
-                              <IconButton edge="end" aria-label="edit ">
-                                <EditIcon />
-                              </IconButton>
-                              <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                              </IconButton>
-                            </ListItemSecondaryAction>
-                          </Grid>
-                        </ListItem>
-                      </List>
-                    </Grid>
-                  </Grid>
-                  <Divider />
-                </CardContent>
-              </Card>
-            </CardContent>
-          </Card>
         </Grid>
       </Grid>
     </div>

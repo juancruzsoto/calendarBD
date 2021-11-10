@@ -9,13 +9,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import HomeIcon from "@material-ui/icons/Home";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import FaceIcon from '@material-ui/icons/Face';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FaceIcon from "@material-ui/icons/Face";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import CakeIcon from "@material-ui/icons/Cake";
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/auth";
 import "../assets/css/navbar.css";
@@ -29,7 +30,6 @@ import {
   Paper,
   Popper,
 } from "@material-ui/core";
-
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -81,6 +81,7 @@ const NavBar = () => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const [open, setOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
 
   const handleClose = (event) => {
     /*if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -118,65 +119,18 @@ const NavBar = () => {
 
   const handleToggle = (event) => {
     setOpen((prevOpen) => !prevOpen);
+    setOpenMobile((prevOpen) => !prevOpen);
     setAnchorEl(event.currentTarget);
   };
 
+  const handleToggleMobile = (event) => {
+    setOpenMobile((prevOpen) => !prevOpen);
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
-  // const menuId = "primary-search-account-menu";
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{ vertical: "top", horizontal: "right" }}
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem to="/perfil" component={RouterLink} onClick={handleMenuClose}>
-  //       Profile
-  //     </MenuItem>
-  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-  //     <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
-  //   </Menu>
-  // );
-
-  // const mobileMenuId = "primary-search-account-menu-mobile";
-  // const renderMobileMenu = (
-  //   <Menu
-  //     anchorEl={mobileMoreAnchorEl}
-  //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
-  //     id={mobileMenuId}
-  //     keepMounted
-  //     transformOrigin={{ vertical: "top", horizontal: "right" }}
-  //     open={isMobileMenuOpen}
-  //     onClose={handleMobileMenuClose}
-  //   >
-  //     <MenuItem>
-  //       <IconButton aria-label="show 11 new notifications" color="inherit">
-  //         <Badge badgeContent={11} color="secondary">
-  //           <NotificationsIcon />
-  //         </Badge>
-  //       </IconButton>
-  //       <p>Notifications</p>
-  //     </MenuItem>
-  //     <MenuItem onClick={handleProfileMenuOpen}>
-  //       <IconButton
-  //         aria-label="account of current user"
-  //         aria-controls="primary-search-account-menu"
-  //         aria-haspopup="true"
-  //         color="inherit"
-  //       >
-  //         <AccountCircle />
-  //       </IconButton>
-  //       <p>Profile</p>
-  //     </MenuItem>
-  //   </Menu>
-  // );
 
   return (
     <>
@@ -212,22 +166,56 @@ const NavBar = () => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            {/* <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={1} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <Button
-                to="/calendario"
-                component={RouterLink}
-                classes={{ label: classes.itemButton }}
-                color="inherit"
+              to="/"
+              component={RouterLink}
+              classes={{ label: classes.itemButton }}
+              color="inherit"
+            >
+              <Icon component={HomeIcon} />
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ margin: "5px 0px 0px 5px" }}
               >
-                <Icon component={CalendarTodayIcon} />
-                <Typography variant="caption" align="center">
-                        Calendario
-                </Typography>
-              </Button>
+                Inicio
+              </Typography>
+            </Button>
+            <Button
+              to="/cumpleaños"
+              component={RouterLink}
+              classes={{ label: classes.itemButton }}
+              color="inherit"
+            >
+              <Icon component={CakeIcon} />
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ margin: "5px 0px 0px 5px" }}
+              >
+                Cumpleaños
+              </Typography>
+            </Button>
+            <Button
+              to="/calendario"
+              component={RouterLink}
+              classes={{ label: classes.itemButton }}
+              color="inherit"
+            >
+              <Icon component={CalendarTodayIcon} />
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ margin: "5px 0px 0px 5px" }}
+              >
+                Calendario
+              </Typography>
+            </Button>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -237,9 +225,13 @@ const NavBar = () => {
               color="inherit"
             >
               <AccountCircle />
-              <Typography variant="caption" align="center">
-                  CUENTA
-                </Typography>
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ margin: "5px 0px 0px 5px" }}
+              >
+                CUENTA
+              </Typography>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -247,10 +239,10 @@ const NavBar = () => {
               aria-label="show more"
               // aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleToggle}
+              onClick={handleToggleMobile}
               color="inherit"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
           </div>
           <Popper
@@ -288,6 +280,47 @@ const NavBar = () => {
                         </ListItemIcon>
                         Cerrar Sesión
                       </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
+          <Popper
+            open={openMobile}
+            anchorEl={anchorEl}
+            placement="bottom-end"
+            style={{ zIndex: "1" }}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps }) => (
+              <Fade {...TransitionProps} timeout={350}>
+                <Paper className={classes.paper}>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                      autoFocusItem={openMobile}
+                      id="menu-list-grow"
+                      onKeyDown={handleListKeyDown}
+                    >
+                      <IconButton
+                        edge="end"
+                        aria-label="account of current user"
+                        // aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleToggle}
+                        color="inherit"
+                      >
+                        <AccountCircle />
+                        <Typography
+                          variant="caption"
+                          align="center"
+                          style={{ margin: "5px 0px 0px 5px" }}
+                        >
+                          CUENTA
+                        </Typography>
+                      </IconButton>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

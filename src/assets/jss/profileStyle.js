@@ -20,7 +20,7 @@ const menuStyle = {
     marginTop: "100px",
     background: "#9e9e9e",
     position: "absoute",
-    opacity: 0.9,
+    opacity: 1.9,
   },
   card2: {
     minHeight: 400,
