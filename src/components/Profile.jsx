@@ -100,7 +100,7 @@ const Profile = (props) => {
                         <Typography
                           align="left"
                           variant="h5"
-                          style={{ textShadow: "1px 1px 2px #ff8f00" }}
+                         
                         >
                           Email:
                         </Typography>

@@ -1,12 +1,13 @@
-
 import background from "../img/mainmenu2.jpg";
+import menuCard from "../img/menuCard2.png";
 
 const menuStyle = {
   root: {
     flexGrow: 1,
     textAlign: "center",
+    minHeight: "100vh",
     width: "100%",
-    height: "100vh",
+    height: "auto",
     overflow: "hidden",
     backgroundSize: "100vw 100vh",
     backgroundRepeat: "no-repeat",
@@ -45,6 +46,7 @@ const menuStyle = {
     height: 100,
     paddingBottom: "2rem",
   },
+
   titlemain: {
     color: "#263238",
     fontFamily: "Century Gothic",
@@ -52,10 +54,12 @@ const menuStyle = {
     marginTop: "80px",
   },
   title: {
-    color: "#ff8f00",
-    fontFamily: "Century Gothic",
-    textShadow: "1px 1px 2px black",
-    fontWeight: 550,
+      color: "black",
+      textDecoration: "none",
+      "&:hover":{
+        color:"white"
+      }
+      
   },
   media: {
     height: 250,
@@ -80,6 +84,34 @@ const menuStyle = {
     margin: {
       margin: "20px",
     },
+  },
+  rootCard: {
+    display: "flex",
+    marginTop: "50px",
+    opacity: 0.9,
+    width: "100%",
+    height: "400",
+    overflow: "hidden",
+    backgroundSize: "100vw 100vh",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "bottom",
+    position: "relative",
+    backgroundImage: `url(${menuCard})`,
+  },
+  details: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  content: {
+    minHeight: 260,
+    paddingBottom: "2rem",
+  },
+  cover: {
+    width: 550,
+  },
+  controls: {
+    display: "flex",
+    alignItems: "center",
   },
 };
 

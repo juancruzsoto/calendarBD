@@ -119,7 +119,6 @@ const NavBar = () => {
 
   const handleToggle = (event) => {
     setOpen((prevOpen) => !prevOpen);
-    setOpenMobile((prevOpen) => !prevOpen);
     setAnchorEl(event.currentTarget);
   };
 
