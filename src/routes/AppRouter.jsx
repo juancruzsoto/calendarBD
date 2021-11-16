@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
-import LoadScreen from "../components/LoadScreen";
 import MenuView from "../views/MenuView";
 import CalendarView from "../views/CalendarView";
 import BirthDaysView from "../views/BirthDaysView";
@@ -12,12 +9,9 @@ import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 
-import { login } from "../actions/auth";
-import { auth } from "../config-firebase";
 import PublicRouter from "./PublicRouter";
 
 const AppRouter = (props) => {
-  const dispatch = useDispatch();
 
   const {log,loading} = props;
 

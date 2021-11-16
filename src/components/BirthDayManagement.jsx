@@ -1,6 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useMemo, useState } from "react";
+import React, {useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import birthdaysStyle from "../assets/jss/birthdaysStyle";
 import "date-fns";
@@ -12,14 +12,11 @@ import {
   FormControl,
   Grid,
   IconButton,
-  InputAdornment,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
   makeStyles,
-  TextField,
 } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -31,7 +28,6 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import { crearRegistro } from "../actions/actionsBD";
-import { auth } from "../config-firebase";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -55,12 +51,6 @@ const BirthDayManagement = (props) => {
     console.log(selectedDate);
     dispatch(crearRegistro(name, selectedDate));
   };
-
-  const view = useMemo(() => {
-    return {
-      calendar: { labels: true },
-    };
-  }, []);
 
   return (
     <div className={classes.root}>

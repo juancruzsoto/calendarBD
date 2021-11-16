@@ -9,7 +9,7 @@ import imgBirthday from "../assets/img/birthday.png";
 import imgCalendar from "../assets/img/calendar.png";
 import { Link as RouterLink } from "react-router-dom";
 // import { Link } from "react-router-dom";
-import { CardMedia, Grid, IconButton, makeStyles } from "@material-ui/core";
+import { CardMedia, Grid, makeStyles } from "@material-ui/core";
 import Grow from "@material-ui/core/Grow";
 import { auth } from "../config-firebase";
 // import "../assets/css/calendar.css";
@@ -41,16 +41,14 @@ const MenuMain = (props) => {
           {...(true ? { timeout: 1000 } : {})}
         >
           <Grid item xs={12} sm={12} md={4}>
-            <Card className={classes.rootCard}>
+            <Card
+              className={classes.rootCard}
+              to="/cumpleaños"
+              component={RouterLink}
+            >
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Typography
-                    component="h5"
-                    variant="h5"
-                    to="/cumpleaños"
-                    component={RouterLink}
-                    className={classes.title}
-                  >
+                  <Typography variant="h5" className={classes.title}>
                     ¡Agrega y edita tus cumpleaños!
                   </Typography>
                   <Typography
@@ -67,8 +65,6 @@ const MenuMain = (props) => {
                 className={classes.cover}
                 image={imgBirthday}
                 title="Live from space album cover"
-                to="/cumpleaños"
-                component={RouterLink}
               />
             </Card>
           </Grid>
@@ -79,16 +75,14 @@ const MenuMain = (props) => {
           {...(true ? { timeout: 2000 } : {})}
         >
           <Grid item xs={12} sm={12} md={4}>
-            <Card className={classes.rootCard}>
+            <Card
+              className={classes.rootCard}
+              to="/calendario"
+              component={RouterLink}
+            >
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Typography
-                    component="h5"
-                    variant="h5"
-                    to="/calendario"
-                    component={RouterLink}
-                    className={classes.title}
-                  >
+                  <Typography variant="h5" className={classes.title}>
                     ¡Observa el Calendario!
                   </Typography>
                   <Typography
@@ -105,8 +99,6 @@ const MenuMain = (props) => {
                 className={classes.cover}
                 image={imgCalendar}
                 title="Live from space album cover"
-                to="/calendario"
-                component={RouterLink}
               />
             </Card>
           </Grid>
@@ -117,16 +109,14 @@ const MenuMain = (props) => {
           {...(true ? { timeout: 2500 } : {})}
         >
           <Grid item xs={12} sm={12} md={4}>
-            <Card className={classes.rootCard}>
+            <Card
+              className={classes.rootCard}
+              to="/calendario"
+              component={RouterLink}
+            >
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Typography
-                    component="h5"
-                    variant="h5"
-                    to="/"
-                    component={RouterLink}
-                    className={classes.title}
-                  >
+                  <Typography variant="h5" className={classes.title}>
                     ¡Configura el Bot de Telegram!
                   </Typography>
                   <Typography
@@ -143,8 +133,6 @@ const MenuMain = (props) => {
                 className={classes.cover}
                 image={imgTelegram}
                 title="Live from space album cover"
-                to="/"
-                component={RouterLink}
               />
             </Card>
           </Grid>

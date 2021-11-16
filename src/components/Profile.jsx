@@ -1,47 +1,26 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import profileStyle from "../assets/jss/profileStyle.js";
 import "date-fns";
 import { auth } from "../config-firebase";
-import DateFnsUtils from "@date-io/date-fns";
-import MomentUtils from "@date-io/moment";
 // import { Link } from "react-router-dom";
 import {
   Button,
   Divider,
-  FormControl,
   Grid,
-  InputAdornment,
   makeStyles,
-  TextField,
 } from "@material-ui/core";
-import Calendar from "react-awesome-calendar";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import GoogleButton from "react-google-button";
-import { useDispatch } from "react-redux";
-import { googleLogin } from "../actions/auth";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(profileStyle);
 
 const Profile = (props) => {
-  const state = useSelector((state) => state);
-  const [userData, setUserData] = useState({ nombre: "", email: "" });
   const { loading } = props;
   console.log(loading, "esaa", auth().currentUser);
   const classes = useStyles();
-
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   auth()

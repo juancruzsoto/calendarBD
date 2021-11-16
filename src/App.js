@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import AppRouter from "./routes/AppRouter";
 import { store } from "./store/store";
 import { auth } from "./config-firebase";
-import { set } from "date-fns";
 
 function App() {
   const [loading, setLoading] = useState(true);

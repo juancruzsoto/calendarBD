@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import NavBar from "./NavBar";
 import Typography from "@material-ui/core/Typography";
 import registerStyle from "../assets/jss/registerStyle";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -17,17 +11,14 @@ import {
   Grid,
   InputAdornment,
   makeStyles,
-  TextField,
 } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import EmailIcon from "@material-ui/icons/Email";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 import { register } from "../actions/auth";
-import { googleLogin } from "../actions/auth";
 
 const useStyles = makeStyles(registerStyle);
 

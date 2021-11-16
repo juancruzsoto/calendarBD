@@ -42,10 +42,10 @@ const menuStyle = {
   container: {
     padding: "15px",
   },
-  content: {
-    height: 100,
-    paddingBottom: "2rem",
-  },
+  // content: {
+  //   height: 100,
+  //   paddingBottom: "2rem",
+  // },
 
   titlemain: {
     color: "#263238",
@@ -97,6 +97,7 @@ const menuStyle = {
     backgroundPosition: "bottom",
     position: "relative",
     backgroundImage: `url(${menuCard})`,
+    textDecoration: "none",
   },
   details: {
     display: "flex",

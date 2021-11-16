@@ -1,7 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useEffect, useState } from "react";
-import NavBar from "./NavBar";
+import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import loginStyle from "../assets/jss/loginStyle";
 import { Link } from "react-router-dom";
@@ -15,15 +14,11 @@ import {
 } from "@material-ui/core";
 import EmailIcon from "@material-ui/icons/Email";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import GoogleButton from "react-google-button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { emailAndPasswordLogin, googleLogin } from "../actions/auth";
-import LoadScreen from "./LoadScreen";
-import background from "../assets/img/bg-bd.jpg";
-import { firebase } from "../config-firebase";
 
 const useStyles = makeStyles(loginStyle);
 
@@ -36,7 +31,6 @@ const MenuLogin = () => {
 
   const { email, pass } = data;
 
-  const state = useSelector((state) => state);
   const handleChange = (e) => {
     const value = e.target.value;
 
