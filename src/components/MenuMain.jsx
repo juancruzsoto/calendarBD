@@ -40,7 +40,7 @@ const MenuMain = (props) => {
           style={{ transformOrigin: "0 0 0" }}
           {...(true ? { timeout: 1000 } : {})}
         >
-          <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12} sm={9.5} md={6} lg={4}>
             <Card
               className={classes.rootCard}
               to="/cumpleaños"
@@ -74,7 +74,7 @@ const MenuMain = (props) => {
           style={{ transformOrigin: "0 0 0" }}
           {...(true ? { timeout: 2000 } : {})}
         >
-          <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12} sm={9.5} md={6} lg={4}>
             <Card
               className={classes.rootCard}
               to="/calendario"
@@ -108,7 +108,7 @@ const MenuMain = (props) => {
           style={{ transformOrigin: "0 0 0" }}
           {...(true ? { timeout: 2500 } : {})}
         >
-          <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12} sm={9.5} md={6} lg={4}> 
             <Card
               className={classes.rootCard}
               to="/calendario"

@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { auth,db } from "../config-firebase";
+import { leerRegistros } from "../actions/actionsBD";
+import PublicRouter from "./PublicRouter";
 
 import MenuView from "../views/MenuView";
 import CalendarView from "../views/CalendarView";
@@ -9,12 +13,42 @@ import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 
-import PublicRouter from "./PublicRouter";
 
-const AppRouter = (props) => {
+const AppRouter = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [log, setLog] = useState(false);
 
-  const {log,loading} = props;
+ const loadData = async (uid) => {
+    const response = await db.collection(`${uid}/cumpleaños/personas`).get();
+    const data = [];
+  
+    response.forEach((persona) => {
+      const personaData = persona.data();
+  
+      data.push({
+        id: persona.id,
+        ...personaData,
+      });
+    });
+  
+    return data;
+  };
+  useEffect(() => {
+  auth().onAuthStateChanged(async (user) => {
+    console.log("#asdsa")
+    if (user) {
+      setLog(true);
 
+      const personaData = await loadData(user.uid);
+
+      dispatch(leerRegistros(personaData));
+    } else {
+      setLog(false);
+    }
+    setLoading(false)
+  });
+}, [dispatch]);
   return (
     <Router>
       <Switch>
