@@ -12,6 +12,7 @@ import ProfileView from "../components/Profile.jsx";
 import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
+import { login } from "../actions/auth";
 
 
 const AppRouter = () => {
@@ -38,6 +39,7 @@ const AppRouter = () => {
   auth().onAuthStateChanged(async (user) => {
     console.log("#asdsa")
     if (user) {
+      dispatch(login(user.uid, user.displayName));
       setLog(true);
 
       const personaData = await loadData(user.uid);

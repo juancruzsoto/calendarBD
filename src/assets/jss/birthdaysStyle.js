@@ -3,7 +3,7 @@ import background from "../img/mainmenu2.jpg";
 const menuStyle = {
   root: {
     flexGrow: 1,
-    minHeight: 400,
+    minHeight: "100vh",
     width: "100%",
     display: "flex",
     textAlign: "center",
@@ -15,24 +15,25 @@ const menuStyle = {
     backgroundImage: `url(${background})`,
   },
   card: {
-    minHeight: 400,
+    height:530,
     textAlign: "center",
     width: "100%",
     marginTop: "90px",
     background: "#9e9e9e",
     position: "absoute",
     content: "",
-    opacity: 0.9,
+    opacity: 0.96,
   },
   card2: {
-    minHeight: 400,
+    maxHeight: 360,
     textAlign: "center",
     width: "100%",
+    overflow: "auto",
     marginTop: "30px",
-    background: "#9e9e9e",
+    background: "#bdbdbd",
     position: "absoute",
     content: "",
-    opacity: 0.9,
+    // opacity: 0.9,
   },
   menucard: {
     backgroundColor: "#333333",
@@ -78,6 +79,14 @@ const menuStyle = {
     },
     margin: {
       margin: "20px",
+    },
+    listclass: {
+      width: "100%",
+      //maxHeight: "320px",
+      // maxHeight: "45vh",
+      //height: `${ window.screen.height * 0.4 }px`,
+      position: "relative",
+      overflow: "auto",
     },
   },
 };

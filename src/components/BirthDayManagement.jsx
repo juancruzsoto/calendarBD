@@ -1,6 +1,6 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import birthdaysStyle from "../assets/jss/birthdaysStyle";
 import "date-fns";
@@ -20,14 +20,14 @@ import {
 } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { crearRegistro } from "../actions/actionsBD";
+import { crearRegistro,borrarRegistro } from "../actions/actionsBD";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -35,8 +35,32 @@ const useStyles = makeStyles(birthdaysStyle);
 const BirthDayManagement = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
+  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.storeBD.data);
+
+  useEffect(() => {
+    let event = [];
+    // eslint-disable-next-line
+    data.map((person) => {
+      if (person.fecha.seconds) {
+        var t = new Date(1970, 0, 1); // Epoch
+        t.setSeconds(person.fecha.seconds);
+      } else {
+        t = person.fecha;
+      }
+      event.push({
+        id: person.id,
+        nombre: person.nombre,
+        birthday: t.toLocaleDateString(),
+      });
+    });
+
+    console.log(event);
+    setEvents(event);
+  }, [data]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date.toDate());
@@ -68,9 +92,9 @@ const BirthDayManagement = (props) => {
                 alignItems="center"
                 className={classes.container}
               >
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} lg={4}>
                   <FormControl className={classes.margin}>
-                    <InputLabel >Nombre</InputLabel>
+                    <InputLabel>Nombre</InputLabel>
                     <Input
                       id="nombre"
                       onChange={handleNameChange}
@@ -85,14 +109,14 @@ const BirthDayManagement = (props) => {
                     locale="es"
                   />
                 </Grid> */}
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} lg={4}>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Grid container justifyContent="space-around">
                       <KeyboardDatePicker
                         margin="normal"
                         id="date-picker-dialog"
                         label="Ingrese fecha de nacimiento"
-                        format="L"
+                        format="ll"
                         value={selectedDate}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
@@ -102,65 +126,74 @@ const BirthDayManagement = (props) => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={4}>
-                    <Button
-                      type="submit"
-                      size="medium"
-                      variant="contained"
-                      onClick={handleAddBirthDay}
-                      className={classes.button}
-                      
-                      // onClick={handleEmailLogin}
-                      // disabled={
-                      //   (values.email === "" && values.password === "") ||
-                      //   Object.keys(formErrors).length > 0
-                      // }
-                    >
-                      Agregar
-                    </Button>
+                <Grid item xs={12} sm={6} lg={4}>
+                  <Button
+                    type="submit"
+                    size="medium"
+                    variant="contained"
+                    onClick={handleAddBirthDay}
+                    className={classes.button}
+
+                    // onClick={handleEmailLogin}
+                    // disabled={
+                    //   (values.email === "" && values.password === "") ||
+                    //   Object.keys(formErrors).length > 0
+                    // }
+                  >
+                    Agregar
+                  </Button>
                 </Grid>
               </Grid>
-              <Card className={classes.card2} style={{ marginTop: "0px" }}>
+              <Card
+                className={classes.card2}
+                style={{ marginTop: "0px", backgroundColor: "" }}
+              >
                 <CardContent>
-                  <Divider />
+                <Divider />
                   <Grid
                     container
                     spacing={3}
                     direction="row"
                     justifyContent="space-evenly"
                     alignItems="flex-start"
+                    // className={classes.container}
                   >
-                    <Grid item xs={12}>
-                      <List>
-                        <ListItem>
-                          <Grid item xs={4}>
-                            <ListItemText
-                              primary="Nombre:"
-                              secondary="Ruperta"
-                            />
-                          </Grid>
-                          <Grid item xs={4}>
-                            <ListItemText
-                              variant="h6"
-                              primary="Cumpleaños"
-                              secondary="20-12-1999"
-                            />
-                          </Grid>
-                          <Grid item xs={4}>
-                            <ListItemSecondaryAction>
-                              <IconButton edge="end" aria-label="edit ">
-                                <EditIcon />
-                              </IconButton>
-                              <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                              </IconButton>
-                            </ListItemSecondaryAction>
-                          </Grid>
-                        </ListItem>
-                      </List>
-                    </Grid>
+                    
+                    {console.log(events)}
+                    {events.map((event) => {
+                      return(
+                      <Grid item xs={12}>
+                        <List className={classes.listclass}>
+                          <ListItem>
+                            <Grid item xs={4}>
+                              <ListItemText
+                                primary={<Typography variant="body1" style={{ color: '#ff8f00',textShadow: "0.5px 0.5px 0.5px black", }}>Nombre:</Typography>}
+                                secondary={<Typography variant="body2" style={{ color: 'black',textShadow: "0.01px 0.01px 0.01px black", }}>{event.nombre}</Typography>}
+                              />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <ListItemText
+                                variant="h6"
+                                primary={<Typography variant="body1" style={{ color: '#ff8f00',textShadow: "0.5px 0.5px 0.5px black", }}>Cumpleaños:</Typography>}
+                                secondary={<Typography variant="body2" style={{ color: 'black',textShadow: "0.01px 0.01px 0.01px black", }}>{event.birthday}</Typography>}
+                              />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <ListItemSecondaryAction>
+                                <IconButton edge="end" aria-label="edit ">
+                                  <EditIcon color="primary"/>
+                                </IconButton>
+                                <IconButton edge="end"  aria-label="delete" onClick={() => {dispatch(borrarRegistro(event.id))}}>
+                                  <DeleteIcon color="error" />
+                                </IconButton>
+                              </ListItemSecondaryAction>
+                            </Grid>
+                          </ListItem>
+                        </List>
+                        <Divider />
+                      </Grid>
+                    )})}
                   </Grid>
-                  <Divider />
                 </CardContent>
               </Card>
             </CardContent>

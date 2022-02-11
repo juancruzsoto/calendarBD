@@ -16,6 +16,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CakeIcon from "@material-ui/icons/Cake";
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/auth";
+import { limpiar } from "../actions/actionsBD";
 import "../assets/css/navbar.css";
 import {
   Button,
@@ -93,6 +94,7 @@ const NavBar = () => {
   const handleLogOut = () => {
     handleMenuClose();
     dispatch(logout());
+    dispatch(limpiar());
   };
 
   function handleListKeyDown(event) {

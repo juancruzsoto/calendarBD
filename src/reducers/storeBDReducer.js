@@ -17,7 +17,21 @@ export const storeBDReducer = (state = initialState, action) => {
         ...state,
         data: action.payload,
       };
+
+    case types.personaDelete:
+      return {
+        ...state,
+        data: state.data.filter((persona) => {
+          return persona.id !== action.payload;
+        }),
+      };
+
+    case types.personaClean:
+      return {
+        ...state,
+        data: [],
+      };
     default:
-      return state; 
+      return state;
   }
 };

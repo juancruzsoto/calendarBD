@@ -39,3 +39,27 @@ export const leerRegistros = (data) => {
     payload: data,
   };
 };
+
+export const borrarRegistro = (id) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+
+    console.log(uid,id)
+    await db.doc(`${uid}/cumpleaños/personas/${id}`).delete();
+
+    dispatch(borrar(id));
+  };
+};
+
+export const borrar = (id) => {
+  return {
+    type: types.personaDelete,
+    payload: id,
+  };
+};
+
+export const limpiar = () => {
+  return {
+    type: types.personaClean,
+  };
+};

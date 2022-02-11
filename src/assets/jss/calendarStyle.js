@@ -3,8 +3,8 @@ import background from "../img/mainmenu2.jpg";
 const calendarStyle = {
   root: {
     flexGrow: 1,
-		minHeight: 400,
-    width: '100%',
+    minHeight: "100vh",
+    width: "100%",
     display: "flex",
     textAlign: "center",
     backgroundSize: "cover",
@@ -15,10 +15,11 @@ const calendarStyle = {
     backgroundImage: `url(${background})`,
   },
   card: {
-    minHeight: 400,
+    maxHeight: 550,
     textAlign: "center",
     width: "100%",
     marginTop: "80px",
+    overflow: "auto",
     background: "#9e9e9e",
     position: "absoute",
     content: "",
