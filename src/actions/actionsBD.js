@@ -26,6 +26,29 @@ export const crearRegistro = (name, date) => {
   };
 };
 
+export const crearRegistroExt = (name, date,uid) => {
+  return async (dispatch, getState) => {
+
+    const datos = {
+      nombre: name,
+      fecha: date,
+    };
+
+    const referencia = await db
+      .collection(`${uid}/cumpleaños/personas`)
+      .add(datos);
+    
+      const id = await referencia.id;
+
+      const newData = {
+        ...datos,
+        id,
+      };
+  
+      dispatch(crear(newData));
+  };
+};
+
 export const crear = (data) => {
   return {
     type: types.personaAdd,

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import birthdaysStyle from "../assets/jss/birthdaysStyle";
 import "date-fns";
+import Skeleton from "@material-ui/lab/Skeleton";
 import MomentUtils from "@date-io/moment";
 // import { Link } from "react-router-dom";
 import {
@@ -27,7 +28,7 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { crearRegistro,borrarRegistro } from "../actions/actionsBD";
+import { crearRegistro, borrarRegistro } from "../actions/actionsBD";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -119,6 +120,7 @@ const BirthDayManagement = (props) => {
                         format="ll"
                         value={selectedDate}
                         onChange={handleDateChange}
+                        InputProps={{ readOnly: true }}
                         KeyboardButtonProps={{
                           "aria-label": "change date",
                         }}
@@ -149,7 +151,7 @@ const BirthDayManagement = (props) => {
                 style={{ marginTop: "0px", backgroundColor: "" }}
               >
                 <CardContent>
-                <Divider />
+                  <Divider />
                   <Grid
                     container
                     spacing={3}
@@ -158,41 +160,164 @@ const BirthDayManagement = (props) => {
                     alignItems="flex-start"
                     // className={classes.container}
                   >
-                    
-                    {console.log(events)}
-                    {events.map((event) => {
-                      return(
-                      <Grid item xs={12}>
-                        <List className={classes.listclass}>
-                          <ListItem>
-                            <Grid item xs={4}>
-                              <ListItemText
-                                primary={<Typography variant="body1" style={{ color: '#ff8f00',textShadow: "0.5px 0.5px 0.5px black", }}>Nombre:</Typography>}
-                                secondary={<Typography variant="body2" style={{ color: 'black',textShadow: "0.01px 0.01px 0.01px black", }}>{event.nombre}</Typography>}
-                              />
-                            </Grid>
-                            <Grid item xs={4}>
-                              <ListItemText
-                                variant="h6"
-                                primary={<Typography variant="body1" style={{ color: '#ff8f00',textShadow: "0.5px 0.5px 0.5px black", }}>Cumpleaños:</Typography>}
-                                secondary={<Typography variant="body2" style={{ color: 'black',textShadow: "0.01px 0.01px 0.01px black", }}>{event.birthday}</Typography>}
-                              />
-                            </Grid>
-                            <Grid item xs={4}>
-                              <ListItemSecondaryAction>
-                                <IconButton edge="end" aria-label="edit ">
-                                  <EditIcon color="primary"/>
-                                </IconButton>
-                                <IconButton edge="end"  aria-label="delete" onClick={() => {dispatch(borrarRegistro(event.id))}}>
-                                  <DeleteIcon color="error" />
-                                </IconButton>
-                              </ListItemSecondaryAction>
-                            </Grid>
-                          </ListItem>
-                        </List>
-                        <Divider />
-                      </Grid>
-                    )})}
+                    {console.log(events, "events")}
+                    {events.length > 0 &&
+                      events.map((event) => {
+                        return (
+                          <Grid item xs={12}>
+                            <List className={classes.listclass}>
+                              <ListItem>
+                                <Grid
+                                  container
+                                  spacing={3}
+                                  direction="row"
+                                  justifyContent="space-evenly"
+                                  alignItems="flex-start"
+                                  // className={classes.container}
+                                >
+                                  <Grid item xs={12} sm={4}>
+                                    <ListItemText
+                                      primary={
+                                        <Typography
+                                          variant="body1"
+                                          style={{
+                                            color: "#ff8f00",
+                                            textShadow:
+                                              "0.5px 0.5px 0.5px black",
+                                          }}
+                                        >
+                                          Nombre:
+                                        </Typography>
+                                      }
+                                      secondary={
+                                        <Typography
+                                          variant="body2"
+                                          style={{
+                                            color: "black",
+                                            textShadow:
+                                              "0.01px 0.01px 0.01px black",
+                                          }}
+                                        >
+                                          {event.nombre}
+                                        </Typography>
+                                      }
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} sm={4}>
+                                    <ListItemText
+                                      variant="h6"
+                                      primary={
+                                        <Typography
+                                          variant="body1"
+                                          style={{
+                                            color: "#ff8f00",
+                                            textShadow:
+                                              "0.5px 0.5px 0.5px black",
+                                          }}
+                                        >
+                                          Cumpleaños:
+                                        </Typography>
+                                      }
+                                      secondary={
+                                        <Typography
+                                          variant="body2"
+                                          style={{
+                                            color: "black",
+                                            textShadow:
+                                              "0.01px 0.01px 0.01px black",
+                                          }}
+                                        >
+                                          {event.birthday}
+                                        </Typography>
+                                      }
+                                    />
+                                  </Grid>
+                                  <Grid item xs={12} sm={4}>
+                                    <ListItemSecondaryAction>
+                                      <Button
+                                        variant="contained"
+                                        // value={search ? [
+                                        //   row.data.price,
+                                        //   row.data.time,
+                                        //   row.data.healthScore,
+                                        // ] : [
+                                        //   row.pricePerServing,
+                                        //   row.readyInMinutes,
+                                        //   row.healthScore,
+                                        // ]}
+                                        className={classes.buttonedit}
+                                        startIcon={<EditIcon />}
+                                      >
+                                        Editar
+                                      </Button>
+                                      <Button
+                                        variant="contained"
+                                        onClick={() => {
+                                          dispatch(borrarRegistro(event.id));
+                                        }}
+                                        //la variable es para abrir el modal
+                                        className={classes.buttondelete}
+                                        startIcon={<DeleteIcon />}
+                                      >
+                                        Eliminar
+                                      </Button>
+                                    </ListItemSecondaryAction>
+                                  </Grid>
+                                </Grid>
+                              </ListItem>
+                            </List>
+                            <Divider />
+                          </Grid>
+                        );
+                      })}
+                    {events.length === 0 &&
+                      [1, 2, 3].map(() => {
+                        return (
+                          <Grid item xs={12}>
+                            <List className={classes.listclass}>
+                              <ListItem>
+                                <Grid
+                                  container
+                                  spacing={3}
+                                  direction="row"
+                                  justifyContent="space-evenly"
+                                  alignItems="flex-start"
+                                  // className={classes.container}
+                                >
+                                  <Grid item sm={12} md={4}>
+                                    <Typography
+                                      component="div"
+                                      key="h3"
+                                      variant="h3"
+                                    >
+                                      <Skeleton />
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item sm={12} md={4}>
+                                    <Typography
+                                      component="div"
+                                      key="h3"
+                                      variant="h3"
+                                    >
+                                      <Skeleton />
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item sm={12} md={4}>
+                                    <Typography
+                                      component="div"
+                                      key="h3"
+                                      variant="h3"
+                                    >
+                                      <Skeleton />
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+                              </ListItem>
+                            </List>
+                            <Divider />
+                          </Grid>
+                        );
+                      })}
                   </Grid>
                 </CardContent>
               </Card>

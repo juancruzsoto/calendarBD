@@ -15,7 +15,7 @@ const menuStyle = {
     backgroundImage: `url(${background})`,
   },
   card: {
-    height:530,
+    height: 530,
     textAlign: "center",
     width: "100%",
     marginTop: "90px",
@@ -34,6 +34,15 @@ const menuStyle = {
     position: "absoute",
     content: "",
     // opacity: 0.9,
+  },
+  card3: {
+    textAlign: "center",
+    width: "100%",
+    background: "#9e9e9e",
+    position: "absoute",
+    content: "",
+    marginTop: "100px",
+    opacity: 0.94,
   },
   menucard: {
     backgroundColor: "#333333",
@@ -77,17 +86,21 @@ const menuStyle = {
     "&:focus": {
       // boxShadow: "greenLight",
     },
-    margin: {
-      margin: "20px",
-    },
-    listclass: {
-      width: "100%",
-      //maxHeight: "320px",
-      // maxHeight: "45vh",
-      //height: `${ window.screen.height * 0.4 }px`,
-      position: "relative",
-      overflow: "auto",
-    },
+  },
+  listclass: {
+    width: "100%",
+    //maxHeight: "320px",
+    // maxHeight: "45vh",
+    //height: `${ window.screen.height * 0.4 }px`,
+    position: "relative",
+    overflow: "auto",
+  },
+  buttondelete: {
+    background: "#c65753",
+  },
+  buttonedit: {
+    background: "#5d83ae",
+    marginRight: "10px",
   },
 };
 

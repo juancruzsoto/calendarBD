@@ -13,6 +13,7 @@ import LoginView from "../views/LoginView";
 import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 import { login } from "../actions/auth";
+import AddBDView from "../views/AddBDView";
 
 
 const AppRouter = () => {
@@ -37,7 +38,6 @@ const AppRouter = () => {
   };
   useEffect(() => {
   auth().onAuthStateChanged(async (user) => {
-    console.log("#asdsa")
     if (user) {
       dispatch(login(user.uid, user.displayName));
       setLog(true);
@@ -66,6 +66,13 @@ const AppRouter = () => {
           path="/register"
           component={RegisterUser}
           log={log}
+          loading={loading}
+        />
+        <PublicRouter
+          exact
+          path="/addBirthday/:uid"
+          component={AddBDView}
+          log={false}
           loading={loading}
         />
 
