@@ -1,36 +1,27 @@
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import birthdaysStyle from "../assets/jss/birthdaysStyle";
 import "date-fns";
 import MomentUtils from "@date-io/moment";
 // import { Link } from "react-router-dom";
-import {
-    Backdrop,
-  Button,
-  Divider,
-  FormControl,
-  Grid,
-  Icon,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  makeStyles,
-  Modal,
-  Paper,
-} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
 import Input from "@material-ui/core/Input";
+import Modal from "@material-ui/core/Modal";
+import Paper from "@material-ui/core/Paper";
+import Icon from "@material-ui/core/Icon";
 import InputLabel from "@material-ui/core/InputLabel";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import CheckIcon from '@material-ui/icons/Check';
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { crearRegistro,borrarRegistro, crearRegistroExt } from "../actions/actionsBD";
+import {crearRegistroExt } from "../actions/actionsBD";
+import { Backdrop, makeStyles } from "@material-ui/core";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -38,34 +29,10 @@ const useStyles = makeStyles(birthdaysStyle);
 const BirthDayManagement = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
-  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pickerStatus, setPickerStatus] = useState(false)
   const [modalConfirmation, setModalConfirmation] = useState(false);
   const dispatch = useDispatch();
-
-  const data = useSelector((state) => state.storeBD.data);
-
-  useEffect(() => {
-    let event = [];
-    // eslint-disable-next-line
-    data.map((person) => {
-      if (person.fecha.seconds) {
-        var t = new Date(1970, 0, 1); // Epoch
-        t.setSeconds(person.fecha.seconds);
-      } else {
-        t = person.fecha;
-      }
-      event.push({
-        id: person.id,
-        nombre: person.nombre,
-        birthday: t.toLocaleDateString(),
-      });
-    });
-
-    console.log(event);
-    setEvents(event);
-  }, [data]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date.toDate());
@@ -78,6 +45,7 @@ const BirthDayManagement = (props) => {
   const handleAddBirthDay = () => {
     dispatch(crearRegistroExt(name, selectedDate,props.uid));
     setModalConfirmation(true)
+    document.getElementById("nombre").value = ""
   };
 
 
@@ -109,13 +77,6 @@ const BirthDayManagement = (props) => {
                     />
                   </FormControl>
                 </Grid>
-                {/* <Grid item xs={12}>
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                    locale="es"
-                  />
-                </Grid> */}
                 <Grid item xs={12} md={4}>
                   <MuiPickersUtilsProvider utils={MomentUtils} >
                     <Grid container justifyContent="space-around">

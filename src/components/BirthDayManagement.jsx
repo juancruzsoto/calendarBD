@@ -7,18 +7,14 @@ import "date-fns";
 import Skeleton from "@material-ui/lab/Skeleton";
 import MomentUtils from "@date-io/moment";
 // import { Link } from "react-router-dom";
-import {
-  Button,
-  Divider,
-  FormControl,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  makeStyles,
-} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +25,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import { crearRegistro, borrarRegistro } from "../actions/actionsBD";
+import { makeStyles } from "@material-ui/core";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -38,6 +35,7 @@ const BirthDayManagement = (props) => {
   const [name, setName] = useState("");
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [pickerStatus, setPickerStatus] = useState(false)
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.storeBD.data);
@@ -72,9 +70,8 @@ const BirthDayManagement = (props) => {
   };
 
   const handleAddBirthDay = (event) => {
-    console.log(name);
-    console.log(selectedDate);
     dispatch(crearRegistro(name, selectedDate));
+    document.getElementById("nombre").value = ""
   };
 
   return (
@@ -120,6 +117,9 @@ const BirthDayManagement = (props) => {
                         format="ll"
                         value={selectedDate}
                         onChange={handleDateChange}
+                        onClick={() => setPickerStatus(true)}
+                        onClose={() => setPickerStatus(false)}
+                        open={pickerStatus}
                         InputProps={{ readOnly: true }}
                         KeyboardButtonProps={{
                           "aria-label": "change date",

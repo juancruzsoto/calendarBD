@@ -1,6 +1,5 @@
 import React from "react";
 import AddBirthday from "../components/AddBirthday.jsx";
-import NavBar from "../components/NavBar";
 import "../assets/css/navbar.css";
 import { useParams } from "react-router-dom";
 
