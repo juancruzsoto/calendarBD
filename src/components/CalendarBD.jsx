@@ -21,9 +21,7 @@ const CalendarBD = (props) => {
   const data = useSelector((state) => state.storeBD.data);
 
   useEffect(() => {
-    console.log(data);
     let currentYear = new Date().getFullYear() - 1;
-    console.log(currentYear);
     let event = [];
     for (var i = 0; i < 3; i++) {
       // eslint-disable-next-line

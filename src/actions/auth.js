@@ -19,7 +19,6 @@ export const register = (email, password, username) => {
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await user.updateProfile({ displayName: username });
-        console.log("todo joya");
         dispatch(login(user.uid, user.displayName));
       });
   };

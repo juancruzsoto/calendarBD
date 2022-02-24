@@ -57,7 +57,7 @@ const BirthDayManagement = (props) => {
           <Card className={classes.card3}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
-                ¡Agrega tu cumpleaños al calendario de El Preju!
+                ¡Agrega tu cumpleaños al calendario de El Preju! 
               </Typography>
               <Grid
                 container

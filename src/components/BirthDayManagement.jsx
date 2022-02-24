@@ -57,7 +57,6 @@ const BirthDayManagement = (props) => {
       });
     });
 
-    console.log(event);
     setEvents(event);
   }, [data]);
 
