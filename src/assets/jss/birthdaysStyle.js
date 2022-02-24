@@ -102,6 +102,9 @@ const menuStyle = {
     background: "#5d83ae",
     marginRight: "10px",
   },
+  item: {
+    paddingTop: "20px",
+  },
 };
 
 export default menuStyle;
