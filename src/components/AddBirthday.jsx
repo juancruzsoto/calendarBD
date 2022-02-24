@@ -21,7 +21,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import {crearRegistroExt } from "../actions/actionsBD";
-import { Backdrop, makeStyles } from "@material-ui/core";
+import { Backdrop, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -32,7 +32,11 @@ const BirthDayManagement = (props) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pickerStatus, setPickerStatus] = useState(false)
   const [modalConfirmation, setModalConfirmation] = useState(false);
+  
+  const theme = useTheme();
+  const screen = useMediaQuery(theme.breakpoints.up('sm'))
   const dispatch = useDispatch();
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date.toDate());
@@ -62,14 +66,13 @@ const BirthDayManagement = (props) => {
               <Grid
                 container
                 spacing={3}
-                direction="column"
                 justifyContent="center"
                 alignItems="center"
                 className={classes.container}
               >
-                <Grid item xs={12} md={4}>
-                  <FormControl className={classes.margin} >
-                    <InputLabel>Nombre</InputLabel>
+                <Grid item xs={12} md={7}>
+                  <FormControl className={classes.margin} fullWidth={!screen} >
+                    <InputLabel >Nombre</InputLabel>
                     <Input
                       id="nombre"
                       onChange={handleNameChange}
@@ -77,10 +80,11 @@ const BirthDayManagement = (props) => {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                   <MuiPickersUtilsProvider utils={MomentUtils} >
-                    <Grid container justifyContent="space-around">
+                    <Grid container justifyContent="space-around" >
                       <KeyboardDatePicker
+                      fullWidth={!screen}
                       className={classes.margin}
                         margin="normal"
                         id="date-picker-dialog"
