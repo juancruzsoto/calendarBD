@@ -67,7 +67,6 @@ export const borrarRegistro = (id) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
 
-    console.log(uid,id)
     await db.doc(`${uid}/cumpleaños/personas/${id}`).delete();
 
     dispatch(borrar(id));
