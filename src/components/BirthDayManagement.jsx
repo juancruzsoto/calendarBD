@@ -39,6 +39,7 @@ const BirthDayManagement = (props) => {
 
   const theme = useTheme();
   const screen = useMediaQuery(theme.breakpoints.up("md"));
+  const heightList = useMediaQuery(theme.breakpoints.up("sm"));
 
   const data = useSelector((state) => state.storeBD.data);
 
@@ -77,7 +78,13 @@ const BirthDayManagement = (props) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
+        alignItems="center"
+        className={classes.container}
+      >
         <Grid item xs={11} sm={11} lg={8}>
           <Card className={classes.card}>
             <CardContent>
@@ -91,8 +98,11 @@ const BirthDayManagement = (props) => {
                 alignItems="center"
                 className={classes.container}
               >
-                <Grid item xs={12} sm={6} lg={4}>
-                  <FormControl className={classes.margin}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <FormControl
+                    className={classes.margin}
+                    fullWidth={!heightList}
+                  >
                     <InputLabel>Nombre</InputLabel>
                     <Input
                       id="nombre"
@@ -108,10 +118,11 @@ const BirthDayManagement = (props) => {
                     locale="es"
                   />
                 </Grid> */}
-                <Grid item xs={12} sm={6} lg={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Grid container justifyContent="space-around">
                       <KeyboardDatePicker
+                        fullWidth={!heightList}
                         margin="normal"
                         id="date-picker-dialog"
                         label="Ingrese fecha de nacimiento"
@@ -129,7 +140,7 @@ const BirthDayManagement = (props) => {
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={12} sm={6} lg={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <Button
                     type="submit"
                     size="medium"
@@ -147,214 +158,228 @@ const BirthDayManagement = (props) => {
                   </Button>
                 </Grid>
               </Grid>
-              <Card
-                className={classes.card2}
-                style={{ marginTop: "0px", backgroundColor: "" }}
+              <Grid
+                container
+                spacing={3}
+                justifyContent="center"
+                alignItems="flex-end"
               >
-                <CardContent>
-                  <Grid
-                    container
-                    spacing={3}
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
+                <Grid item xs={12}>
+                  <Card
+                    className={classes.card2}
+                    // style={{ marginTop: "0px", backgroundColor: "" }}
                   >
-                    <List className={classes.listclass}>
-                      {events.length > 0 &&
-                        events.map((event) => {
-                          return (
-                            <div>
-                              <ListItem>
-                                <Grid
-                                  spacing={3}
-                                  container
-                                  direction="row"
-                                  justifyContent="center"
-                                  alignItems="center"
-                                >
-                                  <Grid item xs={12} md={4}>
+                    <CardContent>
+                      <Grid
+                        container
+                        spacing={3}
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <List
+                          className={classes.listclass}
+                          style={{ maxHeight: !heightList && "30vh" }}
+                        >
+                          {events.length > 0 &&
+                            events.map((event, index) => {
+                              return (
+                                <div key={index}>
+                                  <ListItem>
                                     <Grid
-                                      container
-                                      direction="row"
-                                      justifyContent="flex-start"
-                                      alignItems="center"
-                                    >
-                                      <Grid item xs={5} sm={1.5} md={5}>
-                                        <ListItemText
-                                          primary={
-                                            <Typography
-                                              variant="body1"
-                                              style={{
-                                                color: "#ff8f00",
-                                                textShadow:
-                                                  "0.5px 0.5px 0.5px black",
-                                              }}
-                                            >
-                                              Nombre:
-                                            </Typography>
-                                          }
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6} sm={3} md={6}>
-                                        <ListItemText
-                                          primary={
-                                            <Typography
-                                              variant="body2"
-                                              style={{
-                                                color: "black",
-                                                textShadow:
-                                                  "0.01px 0.01px 0.01px black",
-                                              }}
-                                            >
-                                              {event.nombre}
-                                            </Typography>
-                                          }
-                                        />
-                                      </Grid>
-                                    </Grid>
-                                  </Grid>
-                                  <Grid item xs={12} md={4}>
-                                    <Grid
-                                      container
-                                      direction="row"
-                                      justifyContent="flex-start"
-                                      alignItems="center"
-                                    >
-                                      <Grid item xs={5} sm={1.5} md={5}>
-                                        <ListItemText
-                                          primary={
-                                            <Typography
-                                              variant="body1"
-                                              style={{
-                                                color: "#ff8f00",
-                                                textShadow:
-                                                  "0.5px 0.5px 0.5px black",
-                                              }}
-                                            >
-                                              Cumpleaños:
-                                            </Typography>
-                                          }
-                                        />
-                                      </Grid>
-                                      <Grid item xs={6} sm={3} md={6}>
-                                        <ListItemText
-                                          primary={
-                                            <Typography
-                                              variant="body2"
-                                              style={{
-                                                color: "black",
-                                                textShadow:
-                                                  "0.01px 0.01px 0.01px black",
-                                              }}
-                                            >
-                                              {event.birthday}
-                                            </Typography>
-                                          }
-                                        />
-                                      </Grid>
-                                    </Grid>
-                                  </Grid>
-                                  <Grid
-                                    item
-                                    xs={12}
-                                    md={4}
-                                    style={{
-                                      display: "flex",
-                                      flexFlow: "column",
-                                      justifyContent: "space-around",
-                                      height: "150px",
-                                    }}
-                                  >
-                                    <Grid
-                                      spacing={2}
+                                      spacing={3}
                                       container
                                       direction="row"
                                       justifyContent="center"
                                       alignItems="center"
                                     >
-                                      <Grid item xs={12} md={5}>
-                                        <Button
-                                          variant="contained"
-                                          className={classes.buttonedit}
-                                          startIcon={<EditIcon />}
-                                          fullWidth={!screen}
+                                      <Grid item xs={12} md={4}>
+                                        <Grid
+                                          container
+                                          direction="row"
+                                          justifyContent="flex-start"
+                                          alignItems="center"
                                         >
-                                          Editar
-                                        </Button>
+                                          <Grid item xs={5} sm={1.5} md={5}>
+                                            <ListItemText
+                                              primary={
+                                                <Typography
+                                                  variant="body1"
+                                                  style={{
+                                                    color: "#ff8f00",
+                                                    textShadow:
+                                                      "0.5px 0.5px 0.5px black",
+                                                  }}
+                                                >
+                                                  Nombre:
+                                                </Typography>
+                                              }
+                                            />
+                                          </Grid>
+                                          <Grid item xs={6} sm={3} md={6}>
+                                            <ListItemText
+                                              primary={
+                                                <Typography
+                                                  variant="body2"
+                                                  style={{
+                                                    color: "black",
+                                                    textShadow:
+                                                      "0.01px 0.01px 0.01px black",
+                                                  }}
+                                                >
+                                                  {event.nombre}
+                                                </Typography>
+                                              }
+                                            />
+                                          </Grid>
+                                        </Grid>
                                       </Grid>
-                                      <Grid item xs={12} md={5}>
-                                        <Button
-                                          variant="contained"
-                                          onClick={() => {
-                                            dispatch(borrarRegistro(event.id));
-                                          }}
-                                          className={classes.buttondelete}
-                                          startIcon={<DeleteIcon />}
-                                          fullWidth={!screen}
+                                      <Grid item xs={12} md={4}>
+                                        <Grid
+                                          container
+                                          direction="row"
+                                          justifyContent="flex-start"
+                                          alignItems="center"
                                         >
-                                          Eliminar
-                                        </Button>
+                                          <Grid item xs={5} sm={1.5} md={5}>
+                                            <ListItemText
+                                              primary={
+                                                <Typography
+                                                  variant="body1"
+                                                  style={{
+                                                    color: "#ff8f00",
+                                                    textShadow:
+                                                      "0.5px 0.5px 0.5px black",
+                                                  }}
+                                                >
+                                                  Cumpleaños:
+                                                </Typography>
+                                              }
+                                            />
+                                          </Grid>
+                                          <Grid item xs={6} sm={3} md={6}>
+                                            <ListItemText
+                                              primary={
+                                                <Typography
+                                                  variant="body2"
+                                                  style={{
+                                                    color: "black",
+                                                    textShadow:
+                                                      "0.01px 0.01px 0.01px black",
+                                                  }}
+                                                >
+                                                  {event.birthday}
+                                                </Typography>
+                                              }
+                                            />
+                                          </Grid>
+                                        </Grid>
+                                      </Grid>
+                                      <Grid
+                                        item
+                                        xs={12}
+                                        md={4}
+                                        style={{
+                                          display: "flex",
+                                          flexFlow: "column",
+                                          justifyContent: "space-around",
+                                          height: "14vh",
+                                        }}
+                                      >
+                                        <Grid
+                                          spacing={2}
+                                          container
+                                          direction="row"
+                                          justifyContent="center"
+                                          alignItems="center"
+                                        >
+                                          <Grid item xs={12} md={5}>
+                                            <Button
+                                              variant="contained"
+                                              className={classes.buttonedit}
+                                              startIcon={<EditIcon />}
+                                              fullWidth={!screen}
+                                            >
+                                              Editar
+                                            </Button>
+                                          </Grid>
+                                          <Grid item xs={12} md={5}>
+                                            <Button
+                                              variant="contained"
+                                              onClick={() => {
+                                                dispatch(
+                                                  borrarRegistro(event.id)
+                                                );
+                                              }}
+                                              className={classes.buttondelete}
+                                              startIcon={<DeleteIcon />}
+                                              fullWidth={!screen}
+                                            >
+                                              Eliminar
+                                            </Button>
+                                          </Grid>
+                                        </Grid>
                                       </Grid>
                                     </Grid>
-                                  </Grid>
-                                </Grid>
-                              </ListItem>
-                              <Divider />
-                            </div>
-                          );
-                        })}
-                    </List>
-                    {events.length === 0 &&
-                      [1, 2, 3].map(() => {
-                        return (
-                          <Grid item xs={12}>
-                            <List className={classes.listclass}>
-                              <ListItem>
-                                <Grid
-                                  container
-                                  spacing={3}
-                                  direction="row"
-                                  justifyContent="space-evenly"
-                                  alignItems="flex-start"
-                                  // className={classes.container}
-                                >
-                                  <Grid item sm={12} md={4}>
-                                    <Typography
-                                      component="div"
-                                      key="h3"
-                                      variant="h3"
+                                  </ListItem>
+                                  <Divider style={{ marginTop: "13px" }} />
+                                </div>
+                              );
+                            })}
+                        </List>
+                        {events.length === 0 &&
+                          [1, 2, 3].map(() => {
+                            return (
+                              <Grid item xs={12}>
+                                <List className={classes.listclass}>
+                                  <ListItem>
+                                    <Grid
+                                      container
+                                      spacing={3}
+                                      direction="row"
+                                      justifyContent="space-evenly"
+                                      alignItems="flex-start"
+                                      // className={classes.container}
                                     >
-                                      <Skeleton />
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item sm={12} md={4}>
-                                    <Typography
-                                      component="div"
-                                      key="h3"
-                                      variant="h3"
-                                    >
-                                      <Skeleton />
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item sm={12} md={4}>
-                                    <Typography
-                                      component="div"
-                                      key="h3"
-                                      variant="h3"
-                                    >
-                                      <Skeleton />
-                                    </Typography>
-                                  </Grid>
-                                </Grid>
-                              </ListItem>
-                            </List>
-                            <Divider />
-                          </Grid>
-                        );
-                      })}
-                  </Grid>
-                </CardContent>
-              </Card>
+                                      <Grid item sm={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item sm={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item sm={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
+                                      </Grid>
+                                    </Grid>
+                                  </ListItem>
+                                </List>
+                                <Divider />
+                              </Grid>
+                            );
+                          })}
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>

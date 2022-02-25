@@ -8,12 +8,7 @@ import profileStyle from "../assets/jss/profileStyle.js";
 import "date-fns";
 import { auth } from "../config-firebase";
 // import { Link } from "react-router-dom";
-import {
-  Button,
-  Divider,
-  Grid,
-  makeStyles,
-} from "@material-ui/core";
+import { Button, Divider, Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(profileStyle);
 
@@ -35,7 +30,7 @@ const Profile = (props) => {
     <div className={classes.root}>
       <NavBar position="sticky" />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12} md={11}>
+        <Grid item xs={11} md={11}>
           <Card className={classes.card}>
             <CardContent>
               <Typography
@@ -54,7 +49,7 @@ const Profile = (props) => {
                 alignItems="flex-start"
                 className={classes.container}
               >
-                <Grid item md={4} xs={12}>
+                <Grid item  xs={12} md={4} lg={4}>
                   <Grid item xs={12}>
                     <Avatar
                       alt="Remy Sharp"
@@ -63,46 +58,27 @@ const Profile = (props) => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item md={6} xs={12}>
-                  <Grid item xs={12}>
-                    <Grid container justifyContent="left" alignItems="left">
-                      <Grid item sm={6} xs={12}>
-                        <Typography
-                          align="left"
-                          variant="h5"
-                          style={{ textShadow: "1px 1px 2 px #ff8f00" }}
-                        >
-                          Nombre y Apellido:
-                        </Typography>
-                      </Grid>
-                      <Grid item sm={6} xs={12}>
-                        <Typography
-                          align="left"
-                          variant="h5"
-                         
-                        >
-                          Email:
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid
-                      container
-                      direction="row"
-                      justifyContent="left"
-                      alignItems="left"
-                    >
-                      <Grid item sm={6} xs={12}>
-                        <Typography align="left" variant="h6">
+                <Grid item  xs={12} md={6} lg={4}>
+                  <Grid container spacing={3} direction="column" justifyContent="flex-start" alignItems="center">
+                    <Grid item xs={12}>
+                      <Typography
+                        align="left"
+                        variant="h5"
+                        style={{ textShadow: "1px 1px 2 px #ff8f00" }}
+                      >
+                        Nombre y Apellido:
+                      </Typography>
+                      <Typography align="left" variant="h6">
                           {auth().currentUser.displayName}
                         </Typography>
-                      </Grid>
-                      <Grid item sm={6} xs={12}>
-                        <Typography align="left" variant="h6">
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography align="left" variant="h5">
+                        Email:
+                      </Typography>
+                      <Typography align="left" variant="h6">
                           {auth().currentUser.email}
                         </Typography>
-                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

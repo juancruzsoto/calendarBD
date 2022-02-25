@@ -7,9 +7,9 @@ function BirthDaysView() {
   return (
     <div class="container">
       <div class="header">
-        <NavBar/>
+        <NavBar />
       </div>
-      <div class="content">
+      <div class="content" style={{ flexGrow: 1, textAlign: "center" }}>
         <BirthDayManagement />
       </div>
     </div>

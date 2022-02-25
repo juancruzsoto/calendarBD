@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -21,6 +21,7 @@ import "../assets/css/navbar.css";
 import {
   Button,
   ClickAwayListener,
+  Divider,
   Fade,
   Icon,
   ListItemIcon,
@@ -86,7 +87,6 @@ const NavBar = () => {
     console.log(event.target);*/
     setOpen(false);
   };
-
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -286,23 +286,46 @@ const NavBar = () => {
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
                     >
-                      <IconButton
-                        edge="end"
-                        aria-label="account of current user"
-                        // aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={handleToggle}
-                        color="inherit"
+                      <MenuItem
+                        className={classes.menu}
+                        to="/cumpleaños"
+                        component={RouterLink}
+                        onClick={handleClose}
                       >
-                        <AccountCircle />
-                        <Typography
-                          variant="caption"
-                          align="center"
-                          style={{ margin: "5px 0px 0px 5px" }}
-                        >
-                          CUENTA
-                        </Typography>
-                      </IconButton>
+                        <ListItemIcon>
+                          <CakeIcon />
+                        </ListItemIcon>
+                        Cumpleaños
+                      </MenuItem>
+                      <MenuItem
+                        className={classes.menu}
+                        to="/calendario"
+                        component={RouterLink}
+                        onClick={handleClose}
+                      >
+                        <ListItemIcon>
+                          <CalendarTodayIcon />
+                        </ListItemIcon>
+                        Calendario
+                      </MenuItem>
+                      <Divider style={{margin:"15px"}}/>
+                      <MenuItem
+                        className={classes.menu}
+                        to="/perfil"
+                        component={RouterLink}
+                        onClick={handleClose}
+                      >
+                        <ListItemIcon>
+                          <FaceIcon />
+                        </ListItemIcon>
+                        Perfil
+                      </MenuItem>
+                      <MenuItem className={classes.menu} onClick={handleLogOut}>
+                        <ListItemIcon>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        Cerrar Sesión
+                      </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
