@@ -19,12 +19,22 @@ import InputLabel from "@material-ui/core/InputLabel";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import LinkIcon from "@material-ui/icons/Link";
+import { auth } from "../config-firebase";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import { crearRegistro, borrarRegistro } from "../actions/actionsBD";
-import { makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Backdrop,
+  IconButton,
+  makeStyles,
+  Modal,
+  Paper,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -35,11 +45,13 @@ const BirthDayManagement = (props) => {
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pickerStatus, setPickerStatus] = useState(false);
+  const [modalLink, setModalLink] = useState(false);
   const dispatch = useDispatch();
 
   const theme = useTheme();
   const screen = useMediaQuery(theme.breakpoints.up("md"));
   const heightList = useMediaQuery(theme.breakpoints.up("sm"));
+  const token = useSelector((state) => state.auth.uid);
 
   const data = useSelector((state) => state.storeBD.data);
 
@@ -73,7 +85,13 @@ const BirthDayManagement = (props) => {
 
   const handleAddBirthDay = (event) => {
     dispatch(crearRegistro(name, selectedDate));
-    document.getElementById("nombre").value = "";
+  };
+
+  const copyLink = () => {
+    var content = document.getElementById("component-disabled");
+
+    content.select();
+    document.execCommand("copy");
   };
 
   return (
@@ -90,7 +108,24 @@ const BirthDayManagement = (props) => {
             <CardContent>
               <Typography className={classes.title} variant="h4">
                 ¡Agrega cumpleaños a tu Calendario!
+                {
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="span"
+                    onClick={() => setModalLink(true)}
+                    style={{
+                      cursor: "pointer",
+                      float: "right",
+                      marginTop: "5px",
+                      width: "20px",
+                    }}
+                  >
+                    <LinkIcon />
+                  </IconButton>
+                }
               </Typography>
+
               <Grid
                 container
                 spacing={3}
@@ -106,6 +141,7 @@ const BirthDayManagement = (props) => {
                     <InputLabel>Nombre</InputLabel>
                     <Input
                       id="nombre"
+                      placeholder="Ingrese aquí"
                       onChange={handleNameChange}
                       autoComplete="off"
                     />
@@ -383,6 +419,130 @@ const BirthDayManagement = (props) => {
             </CardContent>
           </Card>
         </Grid>
+        <Modal
+          open={modalLink}
+          onClose={() => setModalLink(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{
+            padding: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+          }}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Paper
+            variant="outlined"
+            style={{
+              position: "absolute",
+              minWidth: 600,
+              padding: "20px",
+              backgroundColor: "#e0e0e0",
+            }}
+          >
+            <Grid
+              container
+              spacing={3}
+              direction="column"
+              // justifyContent="center"
+              // alignItems="center"
+            >
+              {/* <Grid item xs={4}>
+                    <Icon
+                      component={CheckIcon}
+                      style={{ fontSize: 100,color:"#61b146" }}
+                    />
+                  </Grid> */}
+              <Grid item xs={12}>
+                <Typography gutterBottom variant="h6">
+                  {
+                    <IconButton
+                      aria-label="upload picture"
+                      disabled={true}
+                      size="small"
+                      component="span"
+                      style={{
+                        cursor: "pointer",
+                        float: "left",
+                        marginRight: "10px",
+                        color: "white",
+                        backgroundColor: "#4285f4",
+                        // width: "20px",
+                      }}
+                    >
+                      <LinkIcon />
+                    </IconButton>
+                  }
+                  Obtener Enlace
+                </Typography>
+              </Grid>
+              <Grid
+                container
+                spacing={3}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item xs={12} md={9}>
+                  <Input
+                    id="component-disabled"
+                    fullWidth={true}
+                    value={`https://cbirthday.herokuapp.com/addbirthday/${token}`}
+                  />
+                </Grid>
+                {console.log(auth())}
+                <Grid item xs={12} md={3}>
+                  <Button
+                    fullWidth={true}
+                    onClick={copyLink}
+                    style={{ color: "#4285f4" }}
+                  >
+                    Copiar Enlace
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  spacing={3}
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Grid item xs={12} md={8}>
+                    <Typography
+                      variant="body2"
+                      style={{
+                        color: "#4285f4",
+                        textShadow: "0.1px 0.1px black",
+                      }}
+                    >
+                      ¡Comparte este enlace para que puedan agregar cumpleaños a
+                      tu Calendario!
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} md={2}>
+                    <Button
+                      fullWidth={true}
+                      size="medium"
+                      variant="contained"
+                      onClick={() => setModalLink(false)}
+                      style={{ background: "#61b146" }}
+                    >
+                      Hecho
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Modal>
       </Grid>
     </div>
   );

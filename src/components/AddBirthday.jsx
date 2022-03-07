@@ -33,6 +33,8 @@ const BirthDayManagement = (props) => {
   const [pickerStatus, setPickerStatus] = useState(false)
   const [modalConfirmation, setModalConfirmation] = useState(false);
   
+  // const {uid} = props;
+
   const theme = useTheme();
   const screen = useMediaQuery(theme.breakpoints.up('sm'))
   const dispatch = useDispatch();
@@ -53,7 +55,25 @@ const BirthDayManagement = (props) => {
   };
 
 
-  
+// useEffect(() => {
+//   signInWithCustomToken(auth, uid)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//     console.log(user,userCredential)
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log(errorCode,errorMessage)
+//     // ...
+//   });
+//   // eslint-disable-next-line
+// }, [])
+
+
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
@@ -61,7 +81,7 @@ const BirthDayManagement = (props) => {
           <Card className={classes.card3}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
-                ¡Agrega tu cumpleaños al calendario de El Preju! 
+                ¡Agrega tu cumpleaños al calendario! 
               </Typography>
               <Grid
                 container
@@ -167,7 +187,7 @@ const BirthDayManagement = (props) => {
                   </Grid>
                   <Grid item xs={12}>
                     <Typography gutterBottom align="center" variant="body1">
-                      Tu cumpleaños ha sido agregado a la lista de El Preju de manera correcta.
+                      Tu cumpleaños ha sido agregado a la lista de manera correcta.
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={4}>

@@ -8,7 +8,7 @@ import profileStyle from "../assets/jss/profileStyle.js";
 import "date-fns";
 import { auth } from "../config-firebase";
 // import { Link } from "react-router-dom";
-import { Button, Divider, Grid, makeStyles } from "@material-ui/core";
+import { Button, Divider, Grid, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles(profileStyle);
 
@@ -16,6 +16,9 @@ const Profile = (props) => {
   const { loading } = props;
   console.log(loading, "esaa", auth().currentUser);
   const classes = useStyles();
+
+  const theme = useTheme();
+  const screen = useMediaQuery(theme.breakpoints.up("md"));
 
   // useEffect(() => {
   //   auth()
@@ -30,7 +33,7 @@ const Profile = (props) => {
     <div className={classes.root}>
       <NavBar position="sticky" />
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={11} md={11}>
+        <Grid item xs={11} lg={9}>
           <Card className={classes.card}>
             <CardContent>
               <Typography
@@ -44,22 +47,20 @@ const Profile = (props) => {
               <Grid
                 container
                 spacing={3}
-                direction="row"
+                direction={screen ? "row" : "column"}
                 justifyContent="center"
-                alignItems="flex-start"
+                alignItems="center"
                 className={classes.container}
               >
-                <Grid item  xs={12} md={4} lg={4}>
-                  <Grid item xs={12}>
+                <Grid item  xs={12} md={6}>
                     <Avatar
                       alt="Remy Sharp"
                       src={auth().currentUser.photoURL}
                       style={{ width: "300px", height: "300px" }}
                     />
-                  </Grid>
                 </Grid>
-                <Grid item  xs={12} md={6} lg={4}>
-                  <Grid container spacing={3} direction="column" justifyContent="flex-start" alignItems="center">
+                <Grid item  xs={12} md={4} lg={3}>
+                  <Grid container spacing={3} direction="column" justifyContent="flex-start" alignItems="flex-start">
                     <Grid item xs={12}>
                       <Typography
                         align="left"

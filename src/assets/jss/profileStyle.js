@@ -15,11 +15,11 @@ const menuStyle = {
     backgroundImage: `url(${background})`,
   },
   card: {
-    minHeight: 400,
+    maxHeight: 550,
     textAlign: "center",
     marginTop: "100px",
     background: "#9e9e9e",
-    position: "absoute",
+    overflow: "auto",
     opacity: 1.9,
   },
   card2: {
@@ -48,7 +48,7 @@ const menuStyle = {
     color: "#263238",
     fontFamily: "Century Gothic",
     fontWeight: 550,
-    marginTop:"100px"
+    marginTop: "100px",
   },
   title: {
     color: "#ff8f00",
@@ -60,7 +60,7 @@ const menuStyle = {
     height: 250,
   },
   button: {
-    backgroundColor:"#ff8f00",
+    backgroundColor: "#ff8f00",
     color: "#263238",
     marginTop: "10px",
     "&:hover": {

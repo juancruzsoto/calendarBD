@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 function AddBDView() {
   const { uid } = useParams();
 
-  console.log(uid)
   return (
     <div class="container">
       <div class="content">
