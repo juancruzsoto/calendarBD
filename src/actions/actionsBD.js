@@ -27,7 +27,7 @@ export const crearRegistro = (name, date) => {
 };
 
 export const crearRegistroExt = (name, date,uid) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
 
     const datos = {
       nombre: name,
@@ -59,6 +59,33 @@ export const crear = (data) => {
 export const leerRegistros = (data) => {
   return {
     type: types.personaRead,
+    payload: data,
+  };
+};
+
+export const modificarRegistro = (name,date, id) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+
+    const datos = {
+      nombre: name,
+      fecha: date,
+    };
+
+    await db.doc(`${uid}/cumpleaños/personas/${id}`).update(datos);
+
+    const newData = {
+      ...datos,
+      id,
+    };
+
+    dispatch(modificar(newData));
+  };
+};
+
+export const modificar = (data) => {
+  return {
+    type: types.personaEdit,
     payload: data,
   };
 };

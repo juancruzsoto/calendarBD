@@ -6,4 +6,5 @@ export const types = {
   personaDelete: "[Persona] delete",
   personaRead: "[Persona] read",
   personaClean: "[Persona] clean",
+  personaEdit: "[Persona] edit"
 };

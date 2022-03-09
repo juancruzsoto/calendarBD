@@ -92,6 +92,43 @@ const menuStyle = {
       // boxShadow: "greenLight",
     },
   },
+  buttonCancel: {
+    backgroundColor: "#b65753",
+    textShadow: "0px 0px 0px black",
+    color: "#263238",
+    marginRight:"20px",
+    "&:hover": {
+      backgroundColor: "#f65753",
+      borderColor: "redLight",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      // backgroundColor: "green",
+      // borderColor: "greenLight",
+    },
+    "&:focus": {
+      // boxShadow: "greenLight",
+    },
+  },
+  buttonUpdate: {
+    backgroundColor: "#209000",
+    textShadow: "0px 0px 0px black",
+    color: "#263238",
+    "&:hover": {
+      backgroundColor: "#61a146",
+      borderColor: "green",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "green",
+      borderColor: "greenLight",
+    },
+    "&:focus": {
+      boxShadow: "greenLight",
+    },
+  },
   listclass: {
     width: "100%",
     //maxHeight: "320px",

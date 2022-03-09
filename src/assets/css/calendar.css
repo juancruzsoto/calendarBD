@@ -16,7 +16,10 @@ button {
     text-shadow: 0px 1px 0px black;
 }
 
+.weekRow{
+    max-Height: 75px
 
+}
 
 .currentDay {
     border-radius: 50%;

@@ -25,7 +25,7 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { crearRegistro, borrarRegistro } from "../actions/actionsBD";
+import { crearRegistro, borrarRegistro, modificarRegistro } from "../actions/actionsBD";
 import {
   Backdrop,
   IconButton,
@@ -42,10 +42,12 @@ const useStyles = makeStyles(birthdaysStyle);
 const BirthDayManagement = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
-  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [idDoc,setIdDoc] = useState("");
+  const [events, setEvents] = useState([]);
   const [pickerStatus, setPickerStatus] = useState(false);
   const [modalLink, setModalLink] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -87,12 +89,25 @@ const BirthDayManagement = (props) => {
     dispatch(crearRegistro(name, selectedDate));
   };
 
+  const handleUpdateBirthDay = (event) => {
+    dispatch(modificarRegistro(name, selectedDate));
+  };
+
   const copyLink = () => {
-    var content = document.getElementById("component-disabled");
+    let content = document.getElementById("component-disabled");
 
     content.select();
     document.execCommand("copy");
   };
+
+const handleEdit =(index,id,nombre,birthday) =>{
+  console.log(index,id,nombre,birthday)
+  let date = birthday.split("/")
+  setSelectedDate(date[1]+"/"+date[0]+"/"+date[2])
+  setName(nombre)
+  setIdDoc
+  setEditMode(true)
+}
 
   return (
     <div className={classes.root}>
@@ -103,322 +118,421 @@ const BirthDayManagement = (props) => {
         alignItems="center"
         className={classes.container}
       >
-        <Grid item xs={11} sm={11} lg={8}>
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography className={classes.title} variant="h4">
-                ¡Agrega cumpleaños a tu Calendario!
-                {
-                  <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="span"
-                    onClick={() => setModalLink(true)}
-                    style={{
-                      cursor: "pointer",
-                      float: "right",
-                      marginTop: "5px",
-                      width: "20px",
-                    }}
-                  >
-                    <LinkIcon />
-                  </IconButton>
-                }
-              </Typography>
+        {editMode ? (
+          <Grid item xs={11} sm={11} lg={6}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography className={classes.title} variant="h4">
+                  ¡Editar Cumpleaños!
+                </Typography>
 
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                alignItems="center"
-                className={classes.container}
-              >
-                <Grid item xs={12} sm={6} md={4}>
-                  <FormControl
-                    className={classes.margin}
-                    fullWidth={!heightList}
-                  >
-                    <InputLabel>Nombre</InputLabel>
-                    <Input
-                      id="nombre"
-                      placeholder="Ingrese aquí"
-                      onChange={handleNameChange}
-                      autoComplete="off"
-                    />
-                  </FormControl>
-                </Grid>
-                {/* <Grid item xs={12}>
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  alignItems="center"
+                  className={classes.container}
+                >
+                  <Grid item xs={12}>
+                    <FormControl
+                      className={classes.margin}
+                      fullWidth={!heightList}
+                    >
+                      <InputLabel>Nombre</InputLabel>
+                      <Input
+                        id="nombre"
+                        value={name}
+                        placeholder="Ingrese aquí"
+                        onChange={handleNameChange}
+                        autoComplete="off"
+                      />
+                    </FormControl>
+                  </Grid>
+                  {/* <Grid item xs={12}>
                   <DatePicker
                     selected={selectedDate}
                     onChange={handleDateChange}
                     locale="es"
                   />
                 </Grid> */}
-                <Grid item xs={12} sm={6} md={4}>
-                  <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <Grid container justifyContent="space-around">
-                      <KeyboardDatePicker
-                        fullWidth={!heightList}
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Ingrese fecha de nacimiento"
-                        format="ll"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        onClick={() => setPickerStatus(true)}
-                        onClose={() => setPickerStatus(false)}
-                        open={pickerStatus}
-                        InputProps={{ readOnly: true }}
-                        KeyboardButtonProps={{
-                          "aria-label": "change date",
-                        }}
-                      />
-                    </Grid>
-                  </MuiPickersUtilsProvider>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Button
-                    type="submit"
-                    size="medium"
-                    variant="contained"
-                    onClick={handleAddBirthDay}
-                    className={classes.button}
+                  <Grid item xs={12}>
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                      <Grid container justifyContent="space-around">
+                        <KeyboardDatePicker
+                          fullWidth={!heightList}
+                          margin="normal"
+                          id="date-picker-dialog-edit"
+                          label="Ingrese fecha de nacimiento"
+                          format="ll"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          onClick={() => setPickerStatus(true)}
+                          onClose={() => setPickerStatus(false)}
+                          open={pickerStatus}
+                          InputProps={{ readOnly: true }}
+                          KeyboardButtonProps={{
+                            "aria-label": "change date",
+                          }}
+                        />
+                      </Grid>
+                    </MuiPickersUtilsProvider>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      size="medium"
+                      variant="contained"
+                      onClick={() => setEditMode(false)}
+                      className={classes.buttonCancel}
 
-                    // onClick={handleEmailLogin}
-                    // disabled={
-                    //   (values.email === "" && values.password === "") ||
-                    //   Object.keys(formErrors).length > 0
-                    // }
-                  >
-                    Agregar
-                  </Button>
+                      // onClick={handleEmailLogin}
+                      // disabled={
+                      //   (values.email === "" && values.password === "") ||
+                      //   Object.keys(formErrors).length > 0
+                      // }
+                    >
+                      Cancelar
+                    </Button>
+                    <Button
+                      type="submit"
+                      size="medium"
+                      variant="contained"
+                      onClick={handleUpdateBirthDay}
+                      className={classes.buttonUpdate}
+                      
+                      // onClick={handleEmailLogin}
+                      // disabled={
+                      //   (values.email === "" && values.password === "") ||
+                      //   Object.keys(formErrors).length > 0
+                      // }
+                    >
+                      Actualizar
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid
-                container
-                spacing={3}
-                justifyContent="center"
-                alignItems="flex-end"
-              >
-                <Grid item xs={12}>
-                  <Card
-                    className={classes.card2}
-                    // style={{ marginTop: "0px", backgroundColor: "" }}
-                  >
-                    <CardContent>
-                      <Grid
-                        container
-                        spacing={3}
-                        direction="column"
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <List
-                          className={classes.listclass}
-                          style={{ maxHeight: !heightList && "30vh" }}
+              </CardContent>
+            </Card>
+          </Grid>
+        ) : (
+          <Grid item xs={11} sm={11} lg={8}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography className={classes.title} variant="h4">
+                  ¡Agrega cumpleaños a tu Calendario!
+                  {
+                    <IconButton
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
+                      onClick={() => setModalLink(true)}
+                      style={{
+                        cursor: "pointer",
+                        float: "right",
+                        marginTop: "5px",
+                        width: "20px",
+                      }}
+                    >
+                      <LinkIcon />
+                    </IconButton>
+                  }
+                </Typography>
+
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  alignItems="center"
+                  className={classes.container}
+                >
+                  <Grid item xs={12} sm={6} md={4}>
+                    <FormControl
+                      className={classes.margin}
+                      fullWidth={!heightList}
+                    >
+                      <InputLabel>Nombre</InputLabel>
+                      <Input
+                        id="nombre"
+                        placeholder="Ingrese aquí"
+                        onChange={handleNameChange}
+                        autoComplete="off"
+                      />
+                    </FormControl>
+                  </Grid>
+                  {/* <Grid item xs={12}>
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    locale="es"
+                  />
+                </Grid> */}
+                  <Grid item xs={12} sm={6} md={4}>
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                      <Grid container justifyContent="space-around">
+                        <KeyboardDatePicker
+                          fullWidth={!heightList}
+                          margin="normal"
+                          id="date-picker-dialog"
+                          label="Ingrese fecha de nacimiento"
+                          format="ll"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          onClick={() => setPickerStatus(true)}
+                          onClose={() => setPickerStatus(false)}
+                          open={pickerStatus}
+                          InputProps={{ readOnly: true }}
+                          KeyboardButtonProps={{
+                            "aria-label": "change date",
+                          }}
+                        />
+                      </Grid>
+                    </MuiPickersUtilsProvider>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Button
+                      type="submit"
+                      size="medium"
+                      variant="contained"
+                      onClick={handleAddBirthDay}
+                      className={classes.button}
+
+                      // onClick={handleEmailLogin}
+                      // disabled={
+                      //   (values.email === "" && values.password === "") ||
+                      //   Object.keys(formErrors).length > 0
+                      // }
+                    >
+                      Agregar
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  alignItems="flex-end"
+                >
+                  <Grid item xs={12}>
+                    <Card
+                      className={classes.card2}
+                      // style={{ marginTop: "0px", backgroundColor: "" }}
+                    >
+                      <CardContent>
+                        <Grid
+                          container
+                          spacing={3}
+                          direction="column"
+                          justifyContent="center"
+                          alignItems="center"
                         >
-                          {events.length > 0 &&
-                            events.map((event, index) => {
-                              return (
-                                <div key={index}>
-                                  <ListItem>
-                                    <Grid
-                                      spacing={3}
-                                      container
-                                      direction="row"
-                                      justifyContent="center"
-                                      alignItems="center"
-                                    >
-                                      <Grid item xs={12} md={4}>
-                                        <Grid
-                                          container
-                                          direction="row"
-                                          justifyContent="flex-start"
-                                          alignItems="center"
-                                        >
-                                          <Grid item xs={5} sm={1.5} md={5}>
-                                            <ListItemText
-                                              primary={
-                                                <Typography
-                                                  variant="body1"
-                                                  style={{
-                                                    color: "#ff8f00",
-                                                    textShadow:
-                                                      "0.5px 0.5px 0.5px black",
-                                                  }}
-                                                >
-                                                  Nombre:
-                                                </Typography>
-                                              }
-                                            />
-                                          </Grid>
-                                          <Grid item xs={6} sm={3} md={6}>
-                                            <ListItemText
-                                              primary={
-                                                <Typography
-                                                  variant="body2"
-                                                  style={{
-                                                    color: "black",
-                                                    textShadow:
-                                                      "0.01px 0.01px 0.01px black",
-                                                  }}
-                                                >
-                                                  {event.nombre}
-                                                </Typography>
-                                              }
-                                            />
-                                          </Grid>
-                                        </Grid>
-                                      </Grid>
-                                      <Grid item xs={12} md={4}>
-                                        <Grid
-                                          container
-                                          direction="row"
-                                          justifyContent="flex-start"
-                                          alignItems="center"
-                                        >
-                                          <Grid item xs={5} sm={1.5} md={5}>
-                                            <ListItemText
-                                              primary={
-                                                <Typography
-                                                  variant="body1"
-                                                  style={{
-                                                    color: "#ff8f00",
-                                                    textShadow:
-                                                      "0.5px 0.5px 0.5px black",
-                                                  }}
-                                                >
-                                                  Cumpleaños:
-                                                </Typography>
-                                              }
-                                            />
-                                          </Grid>
-                                          <Grid item xs={6} sm={3} md={6}>
-                                            <ListItemText
-                                              primary={
-                                                <Typography
-                                                  variant="body2"
-                                                  style={{
-                                                    color: "black",
-                                                    textShadow:
-                                                      "0.01px 0.01px 0.01px black",
-                                                  }}
-                                                >
-                                                  {event.birthday}
-                                                </Typography>
-                                              }
-                                            />
-                                          </Grid>
-                                        </Grid>
-                                      </Grid>
+                          <List
+                            className={classes.listclass}
+                            style={{ maxHeight: !heightList && "30vh" }}
+                          >
+                            {events.length > 0 &&
+                              events.map((event, index) => {
+                                return (
+                                  <div key={index}>
+                                    <ListItem>
                                       <Grid
-                                        item
-                                        xs={12}
-                                        md={4}
-                                        style={{
-                                          display: "flex",
-                                          flexFlow: "column",
-                                          justifyContent: "space-around",
-                                          height: "14vh",
-                                        }}
+                                        spacing={3}
+                                        container
+                                        direction="row"
+                                        justifyContent="center"
+                                        alignItems="center"
                                       >
-                                        <Grid
-                                          spacing={2}
-                                          container
-                                          direction="row"
-                                          justifyContent="center"
-                                          alignItems="center"
-                                        >
-                                          <Grid item xs={12} md={5}>
-                                            <Button
-                                              variant="contained"
-                                              className={classes.buttonedit}
-                                              startIcon={<EditIcon />}
-                                              fullWidth={!screen}
-                                            >
-                                              Editar
-                                            </Button>
+                                        <Grid item xs={12} md={4}>
+                                          <Grid
+                                            container
+                                            direction="row"
+                                            justifyContent="flex-start"
+                                            alignItems="center"
+                                          >
+                                            <Grid item xs={5} sm={1.5} md={5}>
+                                              <ListItemText
+                                                primary={
+                                                  <Typography
+                                                    variant="body1"
+                                                    style={{
+                                                      color: "#ff8f00",
+                                                      textShadow:
+                                                        "0.5px 0.5px 0.5px black",
+                                                    }}
+                                                  >
+                                                    Nombre:
+                                                  </Typography>
+                                                }
+                                              />
+                                            </Grid>
+                                            <Grid item xs={6} sm={3} md={6}>
+                                              <ListItemText
+                                                primary={
+                                                  <Typography
+                                                    variant="body2"
+                                                    style={{
+                                                      color: "black",
+                                                      textShadow:
+                                                        "0.01px 0.01px 0.01px black",
+                                                    }}
+                                                  >
+                                                    {event.nombre}
+                                                  </Typography>
+                                                }
+                                              />
+                                            </Grid>
                                           </Grid>
-                                          <Grid item xs={12} md={5}>
-                                            <Button
-                                              variant="contained"
-                                              onClick={() => {
-                                                dispatch(
-                                                  borrarRegistro(event.id)
-                                                );
-                                              }}
-                                              className={classes.buttondelete}
-                                              startIcon={<DeleteIcon />}
-                                              fullWidth={!screen}
-                                            >
-                                              Eliminar
-                                            </Button>
+                                        </Grid>
+                                        <Grid item xs={12} md={4}>
+                                          <Grid
+                                            container
+                                            direction="row"
+                                            justifyContent="flex-start"
+                                            alignItems="center"
+                                          >
+                                            <Grid item xs={5} sm={1.5} md={5}>
+                                              <ListItemText
+                                                primary={
+                                                  <Typography
+                                                    variant="body1"
+                                                    style={{
+                                                      color: "#ff8f00",
+                                                      textShadow:
+                                                        "0.5px 0.5px 0.5px black",
+                                                    }}
+                                                  >
+                                                    Cumpleaños:
+                                                  </Typography>
+                                                }
+                                              />
+                                            </Grid>
+                                            <Grid item xs={6} sm={3} md={6}>
+                                              <ListItemText
+                                                primary={
+                                                  <Typography
+                                                    variant="body2"
+                                                    style={{
+                                                      color: "black",
+                                                      textShadow:
+                                                        "0.01px 0.01px 0.01px black",
+                                                    }}
+                                                  >
+                                                    {event.birthday}
+                                                  </Typography>
+                                                }
+                                              />
+                                            </Grid>
+                                          </Grid>
+                                        </Grid>
+                                        <Grid
+                                          item
+                                          xs={12}
+                                          md={4}
+                                          style={{
+                                            display: "flex",
+                                            flexFlow: "column",
+                                            justifyContent: "space-around",
+                                            height: "14vh",
+                                          }}
+                                        >
+                                          <Grid
+                                            spacing={2}
+                                            container
+                                            direction="row"
+                                            justifyContent="center"
+                                            alignItems="center"
+                                          >
+                                            <Grid item xs={12} md={5}>
+                                              <Button
+                                                variant="contained"
+                                                className={classes.buttonedit}
+                                                startIcon={<EditIcon />}
+                                                fullWidth={!screen}
+                                                onClick={()=>handleEdit(index,event.id,event.nombre,event.birthday)}
+                                              >
+                                                Editar
+                                              </Button>
+                                            </Grid>
+                                            <Grid item xs={12} md={5}>
+                                              <Button
+                                                variant="contained"
+                                                onClick={() => {
+                                                  dispatch(
+                                                    borrarRegistro(event.id)
+                                                  );
+                                                }}
+                                                className={classes.buttondelete}
+                                                startIcon={<DeleteIcon />}
+                                                fullWidth={!screen}
+                                              >
+                                                Eliminar
+                                              </Button>
+                                            </Grid>
                                           </Grid>
                                         </Grid>
                                       </Grid>
-                                    </Grid>
-                                  </ListItem>
-                                  <Divider style={{ marginTop: "13px" }} />
-                                </div>
+                                    </ListItem>
+                                    <Divider style={{ marginTop: "13px" }} />
+                                  </div>
+                                );
+                              })}
+                          </List>
+                          {events.length === 0 &&
+                            [1, 2, 3].map(() => {
+                              return (
+                                <Grid item xs={12}>
+                                  <List className={classes.listclass}>
+                                    <ListItem>
+                                      <Grid
+                                        container
+                                        spacing={3}
+                                        direction="row"
+                                        justifyContent="space-evenly"
+                                        alignItems="flex-start"
+                                        // className={classes.container}
+                                      >
+                                        <Grid item sm={12} md={4}>
+                                          <Typography
+                                            component="div"
+                                            key="h3"
+                                            variant="h3"
+                                          >
+                                            <Skeleton />
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item sm={12} md={4}>
+                                          <Typography
+                                            component="div"
+                                            key="h3"
+                                            variant="h3"
+                                          >
+                                            <Skeleton />
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item sm={12} md={4}>
+                                          <Typography
+                                            component="div"
+                                            key="h3"
+                                            variant="h3"
+                                          >
+                                            <Skeleton />
+                                          </Typography>
+                                        </Grid>
+                                      </Grid>
+                                    </ListItem>
+                                  </List>
+                                  <Divider />
+                                </Grid>
                               );
                             })}
-                        </List>
-                        {events.length === 0 &&
-                          [1, 2, 3].map(() => {
-                            return (
-                              <Grid item xs={12}>
-                                <List className={classes.listclass}>
-                                  <ListItem>
-                                    <Grid
-                                      container
-                                      spacing={3}
-                                      direction="row"
-                                      justifyContent="space-evenly"
-                                      alignItems="flex-start"
-                                      // className={classes.container}
-                                    >
-                                      <Grid item sm={12} md={4}>
-                                        <Typography
-                                          component="div"
-                                          key="h3"
-                                          variant="h3"
-                                        >
-                                          <Skeleton />
-                                        </Typography>
-                                      </Grid>
-                                      <Grid item sm={12} md={4}>
-                                        <Typography
-                                          component="div"
-                                          key="h3"
-                                          variant="h3"
-                                        >
-                                          <Skeleton />
-                                        </Typography>
-                                      </Grid>
-                                      <Grid item sm={12} md={4}>
-                                        <Typography
-                                          component="div"
-                                          key="h3"
-                                          variant="h3"
-                                        >
-                                          <Skeleton />
-                                        </Typography>
-                                      </Grid>
-                                    </Grid>
-                                  </ListItem>
-                                </List>
-                                <Divider />
-                              </Grid>
-                            );
-                          })}
-                      </Grid>
-                    </CardContent>
-                  </Card>
+                        </Grid>
+                      </CardContent>
+                    </Card>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
+
         <Modal
           open={modalLink}
           onClose={() => setModalLink(false)}

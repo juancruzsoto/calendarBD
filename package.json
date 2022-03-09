@@ -28,6 +28,7 @@
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0",
     "redux-thunk": "^2.3.0",
+    "sp-react-awesome-calendar-spanish": "^1.0.31",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
