@@ -24,6 +24,16 @@ const calendarStyle = {
     position: "absoute",
     content: "",
     opacity: 0.9,
+    ".modeButtonActive": { color: "#ff8f00" },
+    ".modeButton:hover": { color: "#ff8f00", textShadow: "1px 1px 2px black" },
+    ".calendarHeaderButtons": { color: "#ff8f00" },
+    button: { textShadow: "0px 1px 0px black" },
+    ".weekRow": { maxHeight: "75px" },
+    ".currentDay": {
+      borderRadius: "50%",
+      color: "white",
+      backgroundColor: "#ff8f00",
+    },
   },
   card2: {
     minHeight: 400,
@@ -79,6 +89,18 @@ const calendarStyle = {
     },
     margin: {
       margin: "20px",
+    },
+  },
+  calendar: {
+    ".modeButtonActive": { color: "#ff8f00" },
+    ".modeButton:hover": { color: "#ff8f00", textShadow: "1px 1px 2px black" },
+    ".calendarHeaderButtons": { color: "#ff8f00" },
+    button: { textShadow: "0px 1px 0px black" },
+    ".weekRow": { maxHeight: "75px" },
+    ".currentDay": {
+      borderRadius: "50%",
+      color: "white",
+      backgroundColor: "#ff8f00",
     },
   },
 };

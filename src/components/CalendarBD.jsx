@@ -37,12 +37,12 @@ const CalendarBD = (props) => {
         event.push({
           id: person.id,
           color: "#fd3153",
-          from: t.toISOString().slice(0,-14),
-          to: t.toISOString().slice(0,-14),
+          from: t.toISOString().slice(0, -14),
+          to: t.toISOString().slice(0, -14),
           title: `Cumpleaños de ${person.nombre}`,
         });
       });
-      currentYear++
+      currentYear++;
     }
     console.log(event);
     setEvents(event);
@@ -54,8 +54,8 @@ const CalendarBD = (props) => {
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} md={8}>
           <Card className={classes.card}>
-            <CardContent style={{fontSize:15}}>
-              <Calendar events={events}  />
+            <CardContent className={classes.calendar} style={{ fontSize: 15 }}>
+              <Calendar events={events} />
             </CardContent>
           </Card>
         </Grid>
