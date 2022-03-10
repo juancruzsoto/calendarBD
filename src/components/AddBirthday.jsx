@@ -15,13 +15,18 @@ import Paper from "@material-ui/core/Paper";
 import Icon from "@material-ui/core/Icon";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useDispatch } from "react-redux";
-import CheckIcon from '@material-ui/icons/Check';
+import CheckIcon from "@material-ui/icons/Check";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import {crearRegistroExt } from "../actions/actionsBD";
-import { Backdrop, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import { crearRegistroExt } from "../actions/actionsBD";
+import {
+  Backdrop,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 // import "../assets/css/calendar.css";
 
 const useStyles = makeStyles(birthdaysStyle);
@@ -30,15 +35,12 @@ const BirthDayManagement = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [pickerStatus, setPickerStatus] = useState(false)
+  const [pickerStatus, setPickerStatus] = useState(false);
   const [modalConfirmation, setModalConfirmation] = useState(false);
-  
-  // const {uid} = props;
 
   const theme = useTheme();
-  const screen = useMediaQuery(theme.breakpoints.up('sm'))
+  const screen = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
-
 
   const handleDateChange = (date) => {
     setSelectedDate(date.toDate());
@@ -49,30 +51,28 @@ const BirthDayManagement = (props) => {
   };
 
   const handleAddBirthDay = () => {
-    dispatch(crearRegistroExt(name, selectedDate,props.uid));
-    setModalConfirmation(true)
-    document.getElementById("nombre").value = ""
+    dispatch(crearRegistroExt(name, selectedDate, props.uid));
+    setModalConfirmation(true);
+    document.getElementById("nombre").value = "";
+    setSelectedDate(new Date());
   };
 
-
-// useEffect(() => {
-//   signInWithCustomToken(auth, uid)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user;
-//     console.log(user,userCredential)
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     console.log(errorCode,errorMessage)
-//     // ...
-//   });
-//   // eslint-disable-next-line
-// }, [])
-
-
+  // useEffect(() => {
+  //   signInWithCustomToken(auth, uid)
+  //   .then((userCredential) => {
+  //     // Signed in
+  //     const user = userCredential.user;
+  //     console.log(user,userCredential)
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     console.log(errorCode,errorMessage)
+  //     // ...
+  //   });
+  //   // eslint-disable-next-line
+  // }, [])
 
   return (
     <div className={classes.root}>
@@ -81,7 +81,7 @@ const BirthDayManagement = (props) => {
           <Card className={classes.card3}>
             <CardContent>
               <Typography className={classes.title} variant="h4">
-                ¡Agrega tu cumpleaños al calendario! 
+                ¡Agrega tu cumpleaños al calendario de {props.displayName}!
               </Typography>
               <Grid
                 container
@@ -91,8 +91,8 @@ const BirthDayManagement = (props) => {
                 className={classes.container}
               >
                 <Grid item xs={12} md={7}>
-                  <FormControl className={classes.margin} fullWidth={!screen} >
-                    <InputLabel >Nombre</InputLabel>
+                  <FormControl className={classes.margin} fullWidth={!screen}>
+                    <InputLabel>Nombre</InputLabel>
                     <Input
                       id="nombre"
                       onChange={handleNameChange}
@@ -101,11 +101,11 @@ const BirthDayManagement = (props) => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <MuiPickersUtilsProvider utils={MomentUtils} >
-                    <Grid container justifyContent="space-around" >
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <Grid container justifyContent="space-around">
                       <KeyboardDatePicker
-                      fullWidth={!screen}
-                      className={classes.margin}
+                        fullWidth={!screen}
+                        className={classes.margin}
                         margin="normal"
                         id="date-picker-dialog"
                         label="Ingrese fecha de nacimiento"
@@ -140,72 +140,72 @@ const BirthDayManagement = (props) => {
         </Grid>
 
         <Grid item xs={12}>
-            <Modal
-              open={modalConfirmation}
-              onClose={() => setModalConfirmation(false)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
+          <Modal
+            open={modalConfirmation}
+            onClose={() => setModalConfirmation(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            style={{
+              padding: "20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "absolute",
+            }}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Paper
+              variant="outlined"
               style={{
-                padding: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 position: "absolute",
-              }}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500,
+                maxWidth: 400,
+                padding: "20px",
+                backgroundColor: "#e0e0e0",
               }}
             >
-              <Paper
-                variant="outlined"
-                style={{
-                  position: "absolute",
-                  maxWidth: 400,
-                  padding: "20px",
-                  backgroundColor: "#e0e0e0",
-                }}
+              <Grid
+                container
+                spacing={2}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
               >
-                <Grid
-                  container
-                  spacing={2}
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Grid item xs={4}>
-                    <Icon
-                      component={CheckIcon}
-                      style={{ fontSize: 100,color:"#61b146" }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography gutterBottom align="center" variant="h4">
-                     Operación Exitosa
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography gutterBottom align="center" variant="body1">
-                      Tu cumpleaños ha sido agregado a la lista de manera correcta.
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <Button
-                      fullWidth={true}
-                      size="medium"
-                      variant="contained"
-                      onClick={() => setModalConfirmation(false)}
-                      style={{background:"#61b146" }}
-
-                    >
-                      Aceptar
-                    </Button>
-                  </Grid>
+                <Grid item xs={4}>
+                  <Icon
+                    component={CheckIcon}
+                    style={{ fontSize: 100, color: "#61b146" }}
+                  />
                 </Grid>
-              </Paper>
-            </Modal>
-          </Grid>
+                <Grid item xs={12}>
+                  <Typography gutterBottom align="center" variant="h4">
+                    Operación Exitosa
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography gutterBottom align="center" variant="body1">
+                    Tu cumpleaños ha sido agregado a la lista de manera
+                    correcta al calendario de {props.displayName}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    fullWidth={true}
+                    size="medium"
+                    variant="contained"
+                    onClick={() => setModalConfirmation(false)}
+                    style={{ background: "#61b146" }}
+                  >
+                    Aceptar
+                  </Button>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Modal>
+        </Grid>
       </Grid>
     </div>
   );

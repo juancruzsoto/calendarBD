@@ -25,7 +25,11 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { crearRegistro, borrarRegistro, modificarRegistro } from "../actions/actionsBD";
+import {
+  crearRegistro,
+  borrarRegistro,
+  modificarRegistro,
+} from "../actions/actionsBD";
 import {
   Backdrop,
   IconButton,
@@ -43,7 +47,7 @@ const BirthDayManagement = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [idDoc,setIdDoc] = useState("");
+  const [idDoc, setIdDoc] = useState("");
   const [events, setEvents] = useState([]);
   const [pickerStatus, setPickerStatus] = useState(false);
   const [modalLink, setModalLink] = useState(false);
@@ -73,7 +77,18 @@ const BirthDayManagement = (props) => {
         birthday: t.toLocaleDateString(),
       });
     });
+    event.sort((a, b) => {
+      let fa = a.nombre.toLowerCase(),
+        fb = b.nombre.toLowerCase();
 
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0;
+    });
     setEvents(event);
   }, [data]);
 
@@ -87,10 +102,15 @@ const BirthDayManagement = (props) => {
 
   const handleAddBirthDay = (event) => {
     dispatch(crearRegistro(name, selectedDate));
+    setName("");
+    setSelectedDate(new Date());
   };
 
   const handleUpdateBirthDay = (event) => {
-    dispatch(modificarRegistro(name, selectedDate));
+    dispatch(modificarRegistro(name, selectedDate, idDoc));
+    setEditMode(false);
+    setName("");
+    setSelectedDate(new Date());
   };
 
   const copyLink = () => {
@@ -100,14 +120,26 @@ const BirthDayManagement = (props) => {
     document.execCommand("copy");
   };
 
-const handleEdit =(index,id,nombre,birthday) =>{
-  console.log(index,id,nombre,birthday)
-  let date = birthday.split("/")
-  setSelectedDate(date[1]+"/"+date[0]+"/"+date[2])
-  setName(nombre)
-  setIdDoc
-  setEditMode(true)
-}
+  const handleEdit = (index, id, nombre, birthday) => {
+    console.log(index, id, nombre, birthday);
+    let date = birthday.split("/");
+    let date2 = new Date();
+    console.log(parseInt(date[1]));
+    date2.setDate(date[0]);
+    date2.setMonth(parseInt(date[1]) + 1 - date2.getMonth());
+    date2.setYear(date[2]);
+
+    setSelectedDate(date2); //date[1]+"/"+date[0]+"/"+date[2]
+    setName(nombre);
+    setIdDoc(id);
+    setEditMode(true);
+  };
+
+  const handleCancel = () => {
+    setEditMode(false);
+    setName("");
+    setSelectedDate(new Date());
+  };
 
   return (
     <div className={classes.root}>
@@ -140,8 +172,8 @@ const handleEdit =(index,id,nombre,birthday) =>{
                     >
                       <InputLabel>Nombre</InputLabel>
                       <Input
-                        id="nombre"
-                        value={name}
+                        id="nombreEdit"
+                        value={name || ""}
                         placeholder="Ingrese aquí"
                         onChange={handleNameChange}
                         autoComplete="off"
@@ -179,10 +211,9 @@ const handleEdit =(index,id,nombre,birthday) =>{
                   </Grid>
                   <Grid item xs={12}>
                     <Button
-                      type="submit"
                       size="medium"
                       variant="contained"
-                      onClick={() => setEditMode(false)}
+                      onClick={handleCancel}
                       className={classes.buttonCancel}
 
                       // onClick={handleEmailLogin}
@@ -194,12 +225,11 @@ const handleEdit =(index,id,nombre,birthday) =>{
                       Cancelar
                     </Button>
                     <Button
-                      type="submit"
                       size="medium"
                       variant="contained"
                       onClick={handleUpdateBirthDay}
                       className={classes.buttonUpdate}
-                      
+
                       // onClick={handleEmailLogin}
                       // disabled={
                       //   (values.email === "" && values.password === "") ||
@@ -252,6 +282,7 @@ const handleEdit =(index,id,nombre,birthday) =>{
                       <InputLabel>Nombre</InputLabel>
                       <Input
                         id="nombre"
+                        value={name}
                         placeholder="Ingrese aquí"
                         onChange={handleNameChange}
                         autoComplete="off"
@@ -446,7 +477,14 @@ const handleEdit =(index,id,nombre,birthday) =>{
                                                 className={classes.buttonedit}
                                                 startIcon={<EditIcon />}
                                                 fullWidth={!screen}
-                                                onClick={()=>handleEdit(index,event.id,event.nombre,event.birthday)}
+                                                onClick={() =>
+                                                  handleEdit(
+                                                    index,
+                                                    event.id,
+                                                    event.nombre,
+                                                    event.birthday
+                                                  )
+                                                }
                                               >
                                                 Editar
                                               </Button>
@@ -478,49 +516,46 @@ const handleEdit =(index,id,nombre,birthday) =>{
                           {events.length === 0 &&
                             [1, 2, 3].map(() => {
                               return (
-                                <Grid item xs={12}>
-                                  <List className={classes.listclass}>
-                                    <ListItem>
-                                      <Grid
-                                        container
-                                        spacing={3}
-                                        direction="row"
-                                        justifyContent="space-evenly"
-                                        alignItems="flex-start"
-                                        // className={classes.container}
-                                      >
-                                        <Grid item sm={12} md={4}>
-                                          <Typography
-                                            component="div"
-                                            key="h3"
-                                            variant="h3"
-                                          >
-                                            <Skeleton />
-                                          </Typography>
-                                        </Grid>
-                                        <Grid item sm={12} md={4}>
-                                          <Typography
-                                            component="div"
-                                            key="h3"
-                                            variant="h3"
-                                          >
-                                            <Skeleton />
-                                          </Typography>
-                                        </Grid>
-                                        <Grid item sm={12} md={4}>
-                                          <Typography
-                                            component="div"
-                                            key="h3"
-                                            variant="h3"
-                                          >
-                                            <Skeleton />
-                                          </Typography>
-                                        </Grid>
+                                <List className={classes.listclass}>
+                                  <ListItem>
+                                    <Grid
+                                      container
+                                      spacing={3}
+                                      direction="row"
+                                      justifyContent="space-evenly"
+                                      alignItems="flex-start"
+                                      // className={classes.container}
+                                    >
+                                      <Grid item xs={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
                                       </Grid>
-                                    </ListItem>
-                                  </List>
-                                  <Divider />
-                                </Grid>
+                                      <Grid item xs={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item xs={12} md={4}>
+                                        <Typography
+                                          component="div"
+                                          key="h3"
+                                          variant="h3"
+                                        >
+                                          <Skeleton />
+                                        </Typography>
+                                      </Grid>
+                                    </Grid>
+                                  </ListItem>
+                                </List>
                               );
                             })}
                         </Grid>

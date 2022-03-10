@@ -1,4 +1,4 @@
-import { firebase, googleAuthProvider } from "../config-firebase";
+import { db, firebase, googleAuthProvider } from "../config-firebase";
 import { types } from "../types";
 
 export const googleLogin = () => {
@@ -6,9 +6,13 @@ export const googleLogin = () => {
     firebase
       .auth()
       .signInWithPopup(googleAuthProvider)
-      .then(({ user }) => {
+      .then(async({ user }) => {
+         await db
+          .collection(`${user.uid}/cumpleaños/profile`)
+          .add({nombre: user.displayName});
         dispatch(login(user.uid, user.displayName));
-      });
+      })
+      .catch(() => {});
   };
 };
 
@@ -19,7 +23,14 @@ export const register = (email, password, username) => {
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await user.updateProfile({ displayName: username });
+        await db
+          .collection(`${user.uid}/cumpleaños/profile`)
+          .add({nombre: user.displayName});
         dispatch(login(user.uid, user.displayName));
+      })
+      .catch((e) => {
+        console.log(e);
+        return alert("¡Hubo un error en el registro del usuario!");
       });
   };
 };
@@ -41,6 +52,9 @@ export const emailAndPasswordLogin = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName));
+      })
+      .catch(() => {
+        return alert("Correo y/o contraseña no válida");
       });
   };
 };

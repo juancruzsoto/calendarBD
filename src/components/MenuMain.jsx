@@ -111,7 +111,7 @@ const MenuMain = (props) => {
           <Grid item xs={12} sm={9.5} md={6} lg={4}> 
             <Card
               className={classes.rootCard}
-              to="/calendario"
+              to="/"
               component={RouterLink}
             >
               <div className={classes.details}>

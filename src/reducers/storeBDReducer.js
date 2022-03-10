@@ -18,6 +18,15 @@ export const storeBDReducer = (state = initialState, action) => {
         data: action.payload,
       };
 
+    case types.personaEdit:
+      let newData = state.data.filter((persona) => {
+        return persona.id !== action.payload.id;
+      })
+      return {
+        ...state,
+        data: [...newData,action.payload]
+      };
+
     case types.personaDelete:
       return {
         ...state,

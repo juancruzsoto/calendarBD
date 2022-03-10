@@ -88,14 +88,15 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment1"
+                      htmlFor="input-with-icon-adornment1r"
                       placeholder="Ingrese correo"
                     >
                       Correo electrónico
                     </InputLabel>
                     <Input
                       value={email}
-                      id="input-with-icon-adornment1"
+                      autoComplete="off"
+                      id="input-with-icon-adornment1r"
                       name="email"
                       onChange={handleChange}
                       startAdornment={
@@ -109,15 +110,16 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment2"
-                      placeholder="Ingrese correo"
+                      htmlFor="input-with-icon-adornment2r"
+                      placeholder="Ingrese Nombre"
                     >
-                      Usuario
+                    Nombre
                     </InputLabel>
                     <Input
                       value={user}
-                      id="input-with-icon-adornment2"
+                      id="input-with-icon-adornment2r"
                       name="user"
+                      autoComplete="off"
                       onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">
@@ -130,15 +132,16 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment3"
-                      placeholder="Ingrese correo"
+                      htmlFor="input-with-icon-adornment3r"
+                      placeholder="Ingrese contraseña"
                     >
                       Contraseña
                     </InputLabel>
                     <Input
                       value={pass}
-                      id="input-with-icon-adornment3"
+                      id="input-with-icon-adornment3r"
                       name="pass"
+                      autoComplete="off"
                       onChange={handleChange}
                       type="password"
                       startAdornment={
@@ -152,15 +155,16 @@ const RegisterUser = () => {
                 <Grid item xs={12}>
                   <FormControl className={classes.margin}>
                     <InputLabel
-                      htmlFor="input-with-icon-adornment4"
-                      placeholder="Ingrese contraseña"
+                      htmlFor="input-with-icon-adornment4r"
+                      placeholder="Repetir contraseña"
                     >
                       Repetir Contraseña
                     </InputLabel>
                     <Input
                       value={passR}
-                      id="input-with-icon-adornment4"
+                      id="input-with-icon-adornment4r"
                       name="passR"
+                      autoComplete="off"
                       onChange={handleChange}
                       type="password"
                       startAdornment={
