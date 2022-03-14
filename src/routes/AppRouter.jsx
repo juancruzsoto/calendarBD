@@ -14,6 +14,7 @@ import RegisterUser from "../components/RegisterUser";
 import PrivateRouter from "./PrivateRouter";
 import { login } from "../actions/auth";
 import AddBDView from "../views/AddBDView";
+import TelegramView from "../views/TelegramView";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -103,6 +104,14 @@ const AppRouter = () => {
           loading={loading}
           component={BirthDaysView}
         />
+                <PrivateRouter
+          exact
+          path="/telegram"
+          log={log}
+          loading={loading}
+          component={TelegramView}
+        />
+
         <PublicRouter component={LoginView} log={log} loading={loading} />
       </Switch>
     </Router>

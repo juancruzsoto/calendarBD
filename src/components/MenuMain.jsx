@@ -64,7 +64,7 @@ const MenuMain = (props) => {
               <CardMedia
                 className={classes.cover}
                 image={imgBirthday}
-                title="Live from space album cover"
+                title="Birthdays"
               />
             </Card>
           </Grid>
@@ -98,7 +98,7 @@ const MenuMain = (props) => {
               <CardMedia
                 className={classes.cover}
                 image={imgCalendar}
-                title="Live from space album cover"
+                title="Calendar"
               />
             </Card>
           </Grid>
@@ -111,7 +111,7 @@ const MenuMain = (props) => {
           <Grid item xs={12} sm={9.5} md={6} lg={4}> 
             <Card
               className={classes.rootCard}
-              to="/"
+              to="/telegram"
               component={RouterLink}
             >
               <div className={classes.details}>
@@ -132,7 +132,7 @@ const MenuMain = (props) => {
               <CardMedia
                 className={classes.cover}
                 image={imgTelegram}
-                title="Live from space album cover"
+                title="Telegram"
               />
             </Card>
           </Grid>
