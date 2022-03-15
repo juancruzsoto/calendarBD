@@ -14,6 +14,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CakeIcon from "@material-ui/icons/Cake";
+import TelegramIcon from '@material-ui/icons/Telegram';
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/auth";
 import { limpiar } from "../actions/actionsBD";
@@ -144,7 +145,7 @@ const NavBar = () => {
             to="/"
             component={RouterLink}
           >
-            Calendar Birth-Day
+            Calendar Birthday
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -196,6 +197,21 @@ const NavBar = () => {
                 style={{ margin: "5px 0px 0px 5px" }}
               >
                 Calendario
+              </Typography>
+            </Button>
+            <Button
+              to="/telegram"
+              component={RouterLink}
+              classes={{ label: classes.itemButton }}
+              color="inherit"
+            >
+              <Icon component={TelegramIcon} />
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ margin: "5px 0px 0px 5px" }}
+              >
+                Telegram
               </Typography>
             </Button>
             <IconButton
@@ -286,6 +302,17 @@ const NavBar = () => {
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
                     >
+                                            <MenuItem
+                        className={classes.menu}
+                        to="/"
+                        component={RouterLink}
+                        onClick={handleClose}
+                      >
+                        <ListItemIcon>
+                          <HomeIcon />
+                        </ListItemIcon>
+                        Inicio
+                      </MenuItem>
                       <MenuItem
                         className={classes.menu}
                         to="/cumpleaños"
@@ -307,6 +334,17 @@ const NavBar = () => {
                           <CalendarTodayIcon />
                         </ListItemIcon>
                         Calendario
+                      </MenuItem>
+                      <MenuItem
+                        className={classes.menu}
+                        to="/telegram"
+                        component={RouterLink}
+                        onClick={handleClose}
+                      >
+                        <ListItemIcon>
+                          <TelegramIcon />
+                        </ListItemIcon>
+                        Telegram
                       </MenuItem>
                       <Divider style={{margin:"15px"}}/>
                       <MenuItem

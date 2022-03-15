@@ -148,6 +148,12 @@ const menuStyle = {
   item: {
     paddingTop: "20px",
   },
+  img:{
+    height: "10vh",
+    // display: 'block',
+    overflow: 'hidden',
+    maxWidth: '100%',
+  }
 };
 
 export default menuStyle;

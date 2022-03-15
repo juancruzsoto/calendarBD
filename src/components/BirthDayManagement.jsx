@@ -76,18 +76,29 @@ const BirthDayManagement = (props) => {
         nombre: person.nombre,
         birthday: t.toLocaleDateString(),
       });
+      console.log(t.toLocaleDateString(), new Date(t.toLocaleDateString()));
     });
-    event.sort((a, b) => {
-      let fa = a.nombre.toLowerCase(),
-        fb = b.nombre.toLowerCase();
+    // event.sort((a, b) => {
+    //   let fa = a.nombre.toLowerCase(),
+    //     fb = b.nombre.toLowerCase();
 
-      if (fa < fb) {
-        return -1;
-      }
-      if (fa > fb) {
+    //   if (fa < fb) {
+    //     return -1;
+    //   }
+    //   if (fa > fb) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
+    event.sort((a, b) => {
+      let fa = a.birthday.split("/"),
+        fb = b.birthday.split("/");
+      if (new Date(+fa[2], fa[1] - 1, +fa[0]) > new Date(+fb[2], fb[1] - 1, +fb[0])) {
         return 1;
       }
-      return 0;
+      else{
+        return -1
+      }
     });
     setEvents(event);
   }, [data]);
