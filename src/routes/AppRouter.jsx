@@ -47,10 +47,11 @@ const AppRouter = () => {
         dispatch(leerRegistros(personaData));
       } else {
         setLog(false);
+        setLoading(false);
       }
-      setLoading(false);
     });
-  }, [dispatch]);
+    // eslint-disable-next-line
+  }, []);
   return (
     <Router>
       <Switch>

@@ -14,10 +14,7 @@ import Icon from "@material-ui/core/Icon";
 
 import CheckIcon from "@material-ui/icons/Check";
 
-import {
-  Backdrop,
-  makeStyles,
-} from "@material-ui/core";
+import { Backdrop, makeStyles } from "@material-ui/core";
 
 import botimg from "../assets/img/cbirthdaybot.png";
 import { auth, db } from "../config-firebase";
@@ -40,15 +37,27 @@ const BirthDayManagement = (props) => {
     document.execCommand("copy");
   };
 
-  useEffect(() => {
+  const regenerateCode = () => {
     db.collection(`${uid}/cumpleaños/telegram`)
       .get()
       .then((response) => {
-        console.log(response);
         response.forEach((persona) => {
-          setToken(persona.data().token);
+          let newToken = Math.random().toString(36).substr(2)
+          db.doc(`${uid}/cumpleaños/telegram/${persona.id}`).update({token:newToken})
+          setToken(newToken)
         });
+      }).catch((e)=>{console.log(e)});
+  };
+
+  useEffect(() => {
+    db.collection(`${uid}/cumpleaños/telegram`)
+    .get()
+    .then((response) => {
+      console.log(response);
+      response.forEach((persona) => {
+        setToken(persona.data().token);
       });
+    });
     // eslint-disable-next-line
   }, []);
 
@@ -95,14 +104,14 @@ const BirthDayManagement = (props) => {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} md={8}>
                       <Input
                         id="component-disabled"
                         fullWidth={true}
                         value={`/connect_${uid}_${token}`}
                       />
                     </Grid>
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={2}>
                       <Button
                         fullWidth={true}
                         onClick={() => copyLink("component-disabled")}
@@ -111,11 +120,21 @@ const BirthDayManagement = (props) => {
                         Copiar Comando
                       </Button>
                     </Grid>
+                    <Grid item xs={12} md={2}>
+                      <Button
+                        fullWidth={true}
+                        onClick={regenerateCode}
+                        style={{ color: "#4285f4" }}
+                      >
+                        Regenerar código
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography className={classes.titleSec} variant="h6">
-                    3 - Una vez recibido la confirmación de la cuenta enlazada puede activar los recordatorios:
+                    3 - Una vez recibido la confirmación de la cuenta enlazada
+                    puede activar los recordatorios:
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>

@@ -101,6 +101,7 @@ const menuStyle = {
   },
   details: {
     display: "flex",
+    width:"150%",
     flexDirection: "column",
   },
   content: {
