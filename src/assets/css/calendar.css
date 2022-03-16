@@ -16,11 +16,19 @@ button {
 }
 
 .weekRow {
-  max-height: 75px !important;
+  max-height: 70px !important;
 }
 
 .currentDay {
   border-radius: 50% !important;
   color: white !important;
   background-color: #ff8f00 !important;
+}
+
+.MuiCardContent-root {
+  padding: 10px !important; 
+}
+
+.calendarHeaderButtons {
+  margin: 10px 0 !important;
 }

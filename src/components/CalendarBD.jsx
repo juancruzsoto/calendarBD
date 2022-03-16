@@ -54,7 +54,7 @@ const CalendarBD = (props) => {
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12} md={8}>
           <Card className={classes.card}>
-            <CardContent className={classes.calendar} style={{ fontSize: 15 }}>
+            <CardContent className={classes.calendar} style={{ fontSize: 14 }}>
               <Calendar events={events} />
             </CardContent>
           </Card>
