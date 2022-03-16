@@ -46,7 +46,7 @@ const menuStyle = {
     background: "#9e9e9e",
     position: "absoute",
     content: "",
-    marginTop: "80px",
+    marginTop: "70px",
     opacity: 0.94,
   },
   menucard: {
@@ -63,7 +63,7 @@ const menuStyle = {
     color: "#263238",
     fontFamily: "Century Gothic",
     fontWeight: 550,
-    marginTop: "5px",
+    marginTop: "1px",
     textAlign:"left"
   },
   title: {

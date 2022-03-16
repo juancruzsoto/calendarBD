@@ -33,7 +33,6 @@ const menuStyle = {
     maxHeight: 360,
     textAlign: "center",
     width: "100%",
-    overflow: "auto",
     // marginTop: "30px",
     background: "#bdbdbd",
     position: "absoute",

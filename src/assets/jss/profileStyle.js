@@ -19,7 +19,7 @@ const menuStyle = {
     textAlign: "center",
     marginTop: "100px",
     background: "#9e9e9e",
-    overflow: "auto",
+    overflowY: "auto",
     opacity: 1.9,
   },
   card2: {
